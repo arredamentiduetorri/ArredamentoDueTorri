@@ -54,10 +54,9 @@ export default {
 		sottotitolo: 'Services',
 		voci: [
 			{ numero: '1', titolo: 'Custom design', testo: 'In-home survey, floor plan and render before you order. We know what fits a 12 sqm room and what doesn\u2019t.' },
-			{ numero: '2', titolo: 'Upholstery and reupholstering', testo: 'Sofas and armchairs rebuilt by hand in our workshop: same frame, new padding and new fabric.' },
-			{ numero: '3', titolo: 'Delivery and installation', testo: 'In-house team, not couriers. We carry it up, install it, tidy up and clean before leaving.' },
-			{ numero: '4', titolo: 'Old furniture removal', testo: 'We dismantle and dispose of your old furniture the same day as delivery, if requested when ordering.' },
-			{ numero: '5', titolo: 'After-sales support', testo: 'Adjustments, spare parts and small repairs stay with us: the shop is in Persiceto, not a call centre.' },
+			{ numero: '2', titolo: 'Delivery and installation', testo: 'In-house team, not couriers. We carry it up, install it, tidy up and clean before leaving.' },
+			{ numero: '3', titolo: 'Old furniture removal', testo: 'We dismantle and dispose of your old furniture the same day as delivery, if requested when ordering.' },
+			{ numero: '4', titolo: 'After-sales support', testo: 'Adjustments, spare parts and small repairs stay with us: the shop is in Persiceto, not a call centre.' },
 		],
 	},
 	chiSiamo: {

@@ -54,10 +54,9 @@ export default {
 		sottotitolo: 'Servizi',
 		voci: [
 			{ numero: '1', titolo: 'Progettazione su misura', testo: 'Rilievo in casa, disegno in pianta e render prima di ordinare. Sappiamo cosa entra in un vano di 12 mq e cosa no.' },
-			{ numero: '2', titolo: 'Tappezzeria e rifacimenti', testo: 'Divani e poltrone rifatti a mano nel nostro laboratorio: stessa struttura, nuova imbottitura e nuovo tessuto.' },
-			{ numero: '3', titolo: 'Consegna e montaggio', testo: 'Squadra interna, non corrieri. Portiamo su, montiamo, sistemiamo e puliamo prima di andare via.' },
-			{ numero: '4', titolo: "Ritiro dell'usato", testo: 'Smontiamo e smaltiamo il vecchio arredo il giorno stesso della consegna, se lo chiedi in fase di ordine.' },
-			{ numero: '5', titolo: 'Assistenza dopo la consegna', testo: 'Regolazioni, ricambi e piccoli interventi restano a carico nostro: il negozio è a Persiceto, non un call center.' },
+			{ numero: '2', titolo: 'Consegna e montaggio', testo: 'Squadra interna, non corrieri. Portiamo su, montiamo, sistemiamo e puliamo prima di andare via.' },
+			{ numero: '3', titolo: "Ritiro dell'usato", testo: 'Smontiamo e smaltiamo il vecchio arredo il giorno stesso della consegna, se lo chiedi in fase di ordine.' },
+			{ numero: '4', titolo: 'Assistenza dopo la consegna', testo: 'Regolazioni, ricambi e piccoli interventi restano a carico nostro: il negozio è a Persiceto, non un call center.' },
 		],
 	},
 	chiSiamo: {
