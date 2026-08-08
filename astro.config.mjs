@@ -14,7 +14,11 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/grazie') && !page.includes('/404'),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()]
   }
