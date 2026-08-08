@@ -1,0 +1,110 @@
+---
+interface Props {
+	immagini: { src: string; alt: string }[];
+	class?: string;
+}
+
+const { immagini, class: className } = Astro.props;
+---
+
+<div class:list={['carosello-hero relative isolate overflow-hidden', className]}>
+	{
+		immagini.map((img, i) => (
+			<img
+				src={img.src}
+				alt={img.alt}
+				loading={i === 0 ? 'eager' : 'lazy'}
+				class:list={['carosello-slide absolute inset-0 h-full w-full object-cover', i === 0 && 'is-active']}
+			/>
+		))
+	}
+
+	{
+		immagini.length > 1 && (
+			<div class="carosello-pallini pointer-events-auto absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2 sm:bottom-8">
+				{immagini.map((img, i) => (
+					<button
+						type="button"
+						class:list={['carosello-pallino h-1.5 w-1.5 rounded-full bg-cream/50 transition-all duration-300', i === 0 && 'is-active']}
+						data-indice={i}
+						aria-label={`Vai all'immagine ${i + 1}`}
+					/>
+				))}
+			</div>
+		)
+	}
+</div>
+
+<style>
+	.carosello-slide {
+		opacity: 0;
+		transform: scale(1.04);
+		transition:
+			opacity 1.6s ease,
+			transform 7s ease-out;
+	}
+	.carosello-slide.is-active {
+		opacity: 1;
+		transform: scale(1);
+		z-index: 1;
+	}
+	.carosello-pallino.is-active {
+		width: 1.5rem;
+		background-color: var(--color-cream);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.carosello-slide {
+			transition: none;
+			transform: none;
+		}
+	}
+</style>
+
+<script>
+	(function () {
+		const riduciMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		document.querySelectorAll('.carosello-hero').forEach((carosello) => {
+			const slide = Array.from(carosello.querySelectorAll('.carosello-slide'));
+			const pallini = Array.from(carosello.querySelectorAll('.carosello-pallino'));
+			if (slide.length < 2) return;
+
+			let indiceAttivo = 0;
+			let timer;
+
+			function vai(indice) {
+				slide[indiceAttivo].classList.remove('is-active');
+				pallini[indiceAttivo]?.classList.remove('is-active');
+				indiceAttivo = indice;
+				slide[indiceAttivo].classList.add('is-active');
+				pallini[indiceAttivo]?.classList.add('is-active');
+			}
+
+			function avanti() {
+				vai((indiceAttivo + 1) % slide.length);
+			}
+
+			function avvia() {
+				ferma();
+				timer = window.setInterval(avanti, 5000);
+			}
+
+			function ferma() {
+				if (timer) window.clearInterval(timer);
+			}
+
+			pallini.forEach((pallino, i) => {
+				pallino.addEventListener('click', () => {
+					vai(i);
+					if (!riduciMovimento) avvia();
+				});
+			});
+
+			if (riduciMovimento) return;
+
+			avvia();
+			carosello.addEventListener('mouseenter', ferma);
+			carosello.addEventListener('mouseleave', avvia);
+		});
+	})();
+</script>

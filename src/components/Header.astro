@@ -5,9 +5,10 @@ import { percorso, traduzioni } from '../i18n/utils';
 
 interface Props {
 	lang: Lingua;
+	trasparente?: boolean;
 }
 
-const { lang } = Astro.props;
+const { lang, trasparente = false } = Astro.props;
 const t = traduzioni(lang);
 
 const voci = [
@@ -22,7 +23,10 @@ const percorsoAttuale = Astro.url.pathname;
 const percorsoHome = percorso(lang, '/');
 ---
 
-<header class="sticky top-0 z-50 bg-cream/95 backdrop-blur">
+<header
+	id="header-sito"
+	class:list={['sticky top-0 z-50', trasparente ? 'header-flottante' : 'bg-cream/95 backdrop-blur']}
+>
 	<div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5 sm:px-10">
 		<a href={percorsoHome} class="flex flex-col leading-tight text-ink">
 			<span class="font-heading text-2xl">Arredamenti</span>
@@ -95,5 +99,42 @@ const percorsoHome = percorso(lang, '/');
 			menu.classList.remove('flex');
 			apri.setAttribute('aria-expanded', 'false');
 		});
+	})();
+</script>
+
+<style>
+	.header-flottante {
+		background-color: transparent;
+		background-image: linear-gradient(to bottom, rgb(46 42 38 / 0.32), rgb(46 42 38 / 0));
+		transition:
+			background-color 0.4s ease,
+			backdrop-filter 0.4s ease;
+	}
+	.header-flottante.is-scrolled {
+		background-image: none;
+		background-color: rgb(250 247 242 / 0.95);
+		backdrop-filter: blur(12px);
+	}
+</style>
+
+<script>
+	(function () {
+		const header = document.getElementById('header-sito');
+		if (!header) return;
+
+		function impostaAltezza() {
+			document.documentElement.style.setProperty('--altezza-header', `${header!.offsetHeight}px`);
+		}
+		impostaAltezza();
+		window.addEventListener('load', impostaAltezza);
+		window.addEventListener('resize', impostaAltezza);
+
+		if (!header.classList.contains('header-flottante')) return;
+
+		function aggiornaScroll() {
+			header!.classList.toggle('is-scrolled', window.scrollY > 24);
+		}
+		aggiornaScroll();
+		window.addEventListener('scroll', aggiornaScroll, { passive: true });
 	})();
 </script>

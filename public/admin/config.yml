@@ -128,7 +128,7 @@ collections:
               - { label: "Indirizzo", name: "indirizzo", widget: "string" }
               - { label: "Telefono", name: "telefono", widget: "string" }
               - { label: "Email", name: "email", widget: "string" }
-              - { label: "Orari", name: "orari", widget: "string" }
+              - { label: "Orari", name: "orari", widget: "text" }
               - { label: "P.IVA", name: "piva", widget: "string", required: false }
               - { label: "Facebook (URL)", name: "facebook", widget: "string", required: false }
               - { label: "Instagram (URL)", name: "instagram", widget: "string", required: false }

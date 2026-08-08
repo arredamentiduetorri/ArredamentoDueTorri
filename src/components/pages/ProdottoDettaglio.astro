@@ -1,6 +1,9 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../ProductCard.astro';
+import HeroCarousel from '../HeroCarousel.astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { Lingua } from '../../i18n/utils';
@@ -16,7 +19,18 @@ const { lang, prodotto } = Astro.props;
 const t = traduzioni(lang);
 const { nome, categoria, immagine } = prodotto.data;
 const { Content } = await render(prodotto);
-const icona = immagineSegnaposto(immagine) ? iconePerSlug[slugProdotto(prodotto.id)] : undefined;
+const slug = slugProdotto(prodotto.id);
+const icona = immagineSegnaposto(immagine) ? iconePerSlug[slug] : undefined;
+
+const cartellaFoto = path.join(process.cwd(), 'public', 'images', slug);
+let fotoProdotto: { src: string; alt: string }[] = [];
+if (fs.existsSync(cartellaFoto)) {
+	fotoProdotto = fs
+		.readdirSync(cartellaFoto)
+		.filter((file) => /\.(jpe?g|png|webp)$/i.test(file))
+		.sort()
+		.map((file) => ({ src: `/images/${slug}/${file}`, alt: nome }));
+}
 
 const altriProdotti = await getCollection(
 	'prodotti',
@@ -28,11 +42,13 @@ const altriProdotti = await getCollection(
 	<section class="mx-auto max-w-6xl px-6 py-16 sm:px-10">
 		<a href={percorso(lang, '/prodotti')} class="text-[15px] text-muted hover:text-ink">&larr; {t.prodotti.tornaAiProdotti}</a>
 		<div class="mt-7 grid grid-cols-1 gap-14 lg:grid-cols-[3fr_2fr] lg:items-start">
-			<div class="aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-sand">
+			<div class="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-sand">
 				{icona ? (
 					<div class="flex h-full w-full items-center justify-center bg-[#efe1d6]">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-24 w-24 text-clay-dark/50" fill="currentColor" set:html={icona} />
 					</div>
+				) : fotoProdotto.length > 0 ? (
+					<HeroCarousel immagini={fotoProdotto} class="absolute inset-0 h-full w-full" />
 				) : (
 					<img src={immagine} alt={nome} class="h-full w-full object-cover" />
 				)}

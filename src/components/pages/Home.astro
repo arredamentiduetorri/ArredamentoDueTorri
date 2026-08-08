@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import HeroCarousel from '../HeroCarousel.astro';
 import RecensioneCard from '../RecensioneCard.astro';
 import { getEntry, getCollection } from 'astro:content';
 import type { Lingua } from '../../i18n/utils';
@@ -28,33 +29,43 @@ const fasi = [
 
 const prodotti = await getCollection('prodotti', ({ id }) => id.startsWith(`${lang}/`));
 const lavori = prodotti.slice(0, 6);
+
+const foto = [
+	{ src: '/images/homeCarouselImages/cucina1.jpg', alt: t.home.showroomAlt },
+	{ src: '/images/homeCarouselImages/cucina2.jpg', alt: t.home.showroomAlt },
+	{ src: '/images/homeCarouselImages/cucina3.jpg', alt: t.home.showroomAlt },
+	{ src: '/images/homeCarouselImages/cucina4.jpg', alt: t.home.showroomAlt },
+	{ src: '/images/homeCarouselImages/cucina5.jpg', alt: t.home.showroomAlt },
+];
 ---
 
-<Layout titolo={t.nav.home}>
-	<section class="mx-auto max-w-6xl px-6 py-10 sm:px-10 sm:py-16">
-		<div class="grid grid-cols-1 items-center gap-14 md:grid-cols-2">
-			<div>
-				<p class="text-[13px] font-semibold tracking-[0.16em] text-clay-dark uppercase">{t.home.heroEyebrow}</p>
-				<h1 class="mt-5 text-5xl leading-[1.06] sm:text-6xl">{t.home.heroTitle}</h1>
-				<p class="mt-6 max-w-[40ch] text-lg leading-relaxed text-muted">{t.home.introTesto}</p>
+<Layout titolo={t.nav.home} headerTrasparente>
+	<section
+		class="relative flex h-[82vh] max-h-[820px] min-h-[560px] items-center"
+		style="margin-top: calc(-1 * var(--altezza-header, 88px)); padding-top: var(--altezza-header, 88px);"
+	>
+		<HeroCarousel immagini={foto} class="absolute inset-0 h-full w-full" />
+		<div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/30 to-ink/10"></div>
+
+		<div class="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
+			<div class="max-w-xl">
+				<p class="text-[13px] font-semibold tracking-[0.16em] text-clay uppercase">{t.home.heroEyebrow}</p>
+				<h1 class="mt-5 text-5xl leading-[1.06] text-cream sm:text-6xl">{t.home.heroTitle}</h1>
+				<p class="mt-6 max-w-[40ch] text-lg leading-relaxed text-cream/80">{t.home.introTesto}</p>
 				<div class="mt-9 flex flex-wrap gap-3">
 					<a href={percorso(lang, '/contatti')} class="rounded-full bg-clay px-7 py-4 text-[15px] font-medium text-white transition-colors hover:bg-clay-dark">
 						{t.home.ctaPreventivo}
 					</a>
-					<a href={percorso(lang, '/prodotti')} class="rounded-full border border-line px-7 py-[15px] text-[15px] text-ink transition-colors hover:bg-sand">
+					<a href={percorso(lang, '/prodotti')} class="rounded-full border border-cream/40 px-7 py-[15px] text-[15px] text-cream transition-colors hover:bg-cream/10">
 						{t.home.ctaProdotti}
 					</a>
 				</div>
 			</div>
-			<div class="relative">
-				<div class="aspect-[4/5] overflow-hidden rounded-t-[200px] rounded-b-3xl">
-					<img src="/images/cucina5.jpg" alt={t.home.showroomAlt} class="h-full w-full object-cover" />
-				</div>
-				<div class="absolute -left-6 bottom-9 rounded-2xl bg-cream px-6 py-5 shadow-xl">
-					<p class="font-heading text-3xl text-clay-dark">5,0</p>
-					<p class="mt-0.5 text-[13px] text-faint">su Google, {recensioni.length} recensioni</p>
-				</div>
-			</div>
+		</div>
+
+		<div class="absolute right-6 bottom-6 z-10 rounded-2xl bg-cream/95 px-6 py-5 shadow-xl backdrop-blur sm:right-10 sm:bottom-10">
+			<p class="font-heading text-3xl text-clay-dark">5,0</p>
+			<p class="mt-0.5 text-[13px] text-faint">su Google, {recensioni.length} recensioni</p>
 		</div>
 	</section>
 

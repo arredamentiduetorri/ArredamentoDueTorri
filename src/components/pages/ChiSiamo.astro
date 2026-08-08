@@ -50,8 +50,9 @@ const tappe = pagina!.data.tappe ?? [];
 				<div class="flex flex-col gap-14">
 					{tappe.map((tappa, i) => (
 						<div class="tappa grid grid-cols-1 items-center gap-14 md:grid-cols-2">
-							<div class:list={[i % 2 === 0 ? 'md:order-1' : 'md:order-2', 'tappa-immagine aspect-[5/4] overflow-hidden rounded-[2rem]']}>
+							<div class:list={[i % 2 === 0 ? 'md:order-1' : 'md:order-2', 'tappa-immagine relative aspect-[5/4] overflow-hidden rounded-[2rem]']}>
 								<img src={tappa.immagine} alt={tappa.titolo} loading="lazy" class="h-full w-full object-cover" />
+								<div class="tappa-velo pointer-events-none absolute inset-0 bg-ink" aria-hidden="true"></div>
 							</div>
 							<div class:list={[i % 2 === 0 ? 'md:order-2' : 'md:order-1']}>
 								<span class="tappa-numero flex h-9.5 w-9.5 items-center justify-center rounded-full bg-[#efe1d6] font-heading text-[16px] text-clay-dark">{i + 1}</span>
@@ -71,6 +72,10 @@ const tappe = pagina!.data.tappe ?? [];
 		transform: scale(1);
 		transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 	}
+	.tappa-velo {
+		opacity: 0.55;
+		transition: opacity 0.8s ease;
+	}
 	.tappa-numero,
 	.tappa-titolo,
 	.tappa-testo {
@@ -85,6 +90,9 @@ const tappe = pagina!.data.tappe ?? [];
 	.tappa.is-active .tappa-immagine {
 		transform: scale(1.045);
 	}
+	.tappa.is-active .tappa-velo {
+		opacity: 0;
+	}
 	.tappa.is-active .tappa-numero {
 		background-color: var(--color-clay);
 		color: white;
@@ -97,6 +105,7 @@ const tappe = pagina!.data.tappe ?? [];
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.tappa-immagine,
+		.tappa-velo,
 		.tappa-numero,
 		.tappa-titolo,
 		.tappa-testo {
@@ -113,10 +122,10 @@ const tappe = pagina!.data.tappe ?? [];
 		if (!cronologia || !progresso || tappe.length === 0) return;
 
 		function aggiornaProgresso() {
-			const rect = cronologia.getBoundingClientRect();
+			const rect = cronologia!.getBoundingClientRect();
 			const centro = window.innerHeight / 2;
 			const percorsi = Math.min(Math.max(centro - rect.top, 0), rect.height);
-			progresso.style.height = `${percorsi}px`;
+			progresso!.style.height = `${percorsi}px`;
 		}
 
 		let richiesto = false;

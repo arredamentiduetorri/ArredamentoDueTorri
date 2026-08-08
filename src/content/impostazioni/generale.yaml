@@ -3,7 +3,14 @@ generale:
   indirizzo: "Via Magellano n° 3, 40017 San Giovanni in Persiceto (BO)"
   telefono: "051 822655"
   email: "arredamentiduetorri@libero.it"
-  orari: "Chiama per verificare gli orari aggiornati"
+  orari: |
+    Lunedì: 09:00–12:30, 15:00–19:00
+    Martedì: 09:00–12:30, 15:00–19:00
+    Mercoledì: 09:00–12:30, 15:00–19:00
+    Giovedì: 09:00–12:30, 15:00–19:00
+    Venerdì: 09:00–12:30, 15:00–19:00
+    Sabato: 09:00–12:30, 15:00–19:00
+    Domenica: Chiuso
   piva: ""
   facebook: "https://www.facebook.com/p/Arredamenti-Due-Torri-snc-100044722821366/"
   instagram: ""
