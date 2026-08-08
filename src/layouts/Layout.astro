@@ -2,28 +2,56 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { rilevaLingua, traduzioni } from '../i18n/utils';
+import DatiStrutturati from '../components/DatiStrutturati.astro';
+import { rilevaLingua, traduzioni, percorsoAltraLingua } from '../i18n/utils';
 
 interface Props {
 	titolo: string;
 	descrizione?: string;
+	immagine?: string;
 	headerTrasparente?: boolean;
 }
 
 const lang = rilevaLingua(Astro.url);
 const t = traduzioni(lang);
 
-const { titolo, descrizione = t.meta.descrizione, headerTrasparente = false } = Astro.props;
+const { titolo, descrizione = t.meta.descrizione, immagine = '/images/shop.jpeg', headerTrasparente = false } = Astro.props;
+
+const urlCanonico = new URL(Astro.url.pathname, Astro.site);
+const urlAltraLingua = new URL(percorsoAltraLingua(lang, Astro.url.pathname), Astro.site);
+const urlImmagine = new URL(immagine, Astro.site);
+const titoloCompleto = `${titolo} · Arredamento Due Torri`;
 ---
 
 <html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={descrizione} />
 		<meta name="generator" content={Astro.generator} />
-		<title>{titolo} · Arredamento Due Torri</title>
+		<title>{titoloCompleto}</title>
+
+		<link rel="canonical" href={urlCanonico} />
+		<link rel="alternate" hreflang="it" href={lang === 'it' ? urlCanonico : urlAltraLingua} />
+		<link rel="alternate" hreflang="en" href={lang === 'en' ? urlCanonico : urlAltraLingua} />
+		<link rel="alternate" hreflang="x-default" href={lang === 'it' ? urlCanonico : urlAltraLingua} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Arredamento Due Torri" />
+		<meta property="og:locale" content={lang === 'it' ? 'it_IT' : 'en_US'} />
+		<meta property="og:title" content={titoloCompleto} />
+		<meta property="og:description" content={descrizione} />
+		<meta property="og:url" content={urlCanonico} />
+		<meta property="og:image" content={urlImmagine} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={titoloCompleto} />
+		<meta name="twitter:description" content={descrizione} />
+		<meta name="twitter:image" content={urlImmagine} />
+
+		<DatiStrutturati />
 	</head>
 	<body class="flex min-h-screen flex-col bg-cream text-ink">
 		<Header lang={lang} trasparente={headerTrasparente} />

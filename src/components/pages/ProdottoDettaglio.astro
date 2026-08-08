@@ -38,7 +38,7 @@ const altriProdotti = await getCollection(
 );
 ---
 
-<Layout titolo={nome}>
+<Layout titolo={nome} immagine={immagine}>
 	<section class="mx-auto max-w-6xl px-6 py-16 sm:px-10">
 		<a href={percorso(lang, '/prodotti')} class="text-[15px] text-muted hover:text-ink">&larr; {t.prodotti.tornaAiProdotti}</a>
 		<div class="mt-7 grid grid-cols-1 gap-14 lg:grid-cols-[3fr_2fr] lg:items-start">

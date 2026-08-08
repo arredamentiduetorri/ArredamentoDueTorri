@@ -1,0 +1,37 @@
+---
+import { getEntry } from 'astro:content';
+
+const impostazioni = await getEntry('impostazioni', 'generale');
+const dati = impostazioni?.data;
+
+// Orari fissi (lun-sab, doppio turno): tenere allineati manualmente a src/content/impostazioni/generale.yaml
+// se cambia l'orario del negozio, perché qui servono in formato strutturato per Google, non testo libero.
+const giorniApertura = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const datiStrutturati = {
+	'@context': 'https://schema.org',
+	'@type': 'FurnitureStore',
+	name: dati?.nomeAttivita,
+	image: new URL('/images/shop.jpeg', Astro.site).toString(),
+	url: Astro.site?.toString(),
+	telephone: dati?.telefono,
+	email: dati?.email,
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: dati?.indirizzo,
+		addressCountry: 'IT',
+	},
+	geo: {
+		'@type': 'GeoCoordinates',
+		latitude: 44.6289044,
+		longitude: 11.1968628,
+	},
+	openingHoursSpecification: [
+		{ '@type': 'OpeningHoursSpecification', dayOfWeek: giorniApertura, opens: '09:00', closes: '12:30' },
+		{ '@type': 'OpeningHoursSpecification', dayOfWeek: giorniApertura, opens: '15:00', closes: '19:00' },
+	],
+	sameAs: [dati?.facebook, dati?.instagram].filter(Boolean),
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(datiStrutturati)} />
