@@ -1,0 +1,176 @@
+---
+interface Props {
+	lat: number;
+	lon: number;
+	zoom?: number;
+	nomeAttivita: string;
+	indirizzo?: string;
+	telefono?: string;
+	email?: string;
+	etichettaTelefono: string;
+	etichettaEmail: string;
+	etichettaSito: string;
+}
+
+const {
+	lat,
+	lon,
+	zoom = 15,
+	nomeAttivita,
+	indirizzo = '',
+	telefono = '',
+	email = '',
+	etichettaTelefono,
+	etichettaEmail,
+	etichettaSito,
+} = Astro.props;
+---
+
+<div
+	id="mappa-contatti"
+	class="h-[420px] w-full"
+	data-lat={lat}
+	data-lon={lon}
+	data-zoom={zoom}
+	data-nome={nomeAttivita}
+	data-indirizzo={indirizzo}
+	data-telefono={telefono}
+	data-email={email}
+	data-etichetta-telefono={etichettaTelefono}
+	data-etichetta-email={etichettaEmail}
+	data-etichetta-sito={etichettaSito}
+>
+</div>
+
+<style>
+	#mappa-contatti :global(.leaflet-tile-pane) {
+		filter: grayscale(15%);
+	}
+	:global(html.dark) #mappa-contatti :global(.leaflet-tile-pane) {
+		filter: invert(1) hue-rotate(180deg) grayscale(0) brightness(0.95);
+	}
+	#mappa-contatti :global(.leaflet-control-attribution) {
+		font-size: 0.65rem;
+	}
+	#mappa-contatti :global(.leaflet-popup-content-wrapper) {
+		border-radius: 0.75rem;
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+	}
+	#mappa-contatti :global(.leaflet-popup-content) {
+		margin: 0;
+	}
+	#mappa-contatti :global(.leaflet-popup-tip) {
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+	}
+	:global(html.dark) #mappa-contatti :global(.leaflet-popup-content-wrapper),
+	:global(html.dark) #mappa-contatti :global(.leaflet-popup-tip) {
+		background: #1c1917;
+		color: #e7e5e4;
+	}
+	:global(html.dark) #mappa-contatti :global(.leaflet-popup-close-button) {
+		color: #a8a29e;
+	}
+	#mappa-contatti :global(.popup-nome) {
+		margin: 0;
+		font-size: 0.9rem;
+		font-weight: 700;
+		color: #78350f;
+	}
+	:global(html.dark) #mappa-contatti :global(.popup-nome) {
+		color: #fbbf24;
+	}
+	#mappa-contatti :global(.popup-indirizzo) {
+		margin: 0.35rem 0 0;
+		font-size: 0.8rem;
+		line-height: 1.4;
+		color: #57534e;
+	}
+	:global(html.dark) #mappa-contatti :global(.popup-indirizzo) {
+		color: #a8a29e;
+	}
+	#mappa-contatti :global(.popup-riga) {
+		margin: 0.35rem 0 0;
+		font-size: 0.8rem;
+	}
+	#mappa-contatti :global(.popup-link) {
+		color: #b45309;
+		text-decoration: none;
+		font-weight: 600;
+	}
+	:global(html.dark) #mappa-contatti :global(.popup-link) {
+		color: #fb923c;
+	}
+	#mappa-contatti :global(.popup-link:hover) {
+		text-decoration: underline;
+	}
+</style>
+
+<script>
+	import L from 'leaflet';
+	import 'leaflet/dist/leaflet.css';
+
+	const contenitore = document.getElementById('mappa-contatti');
+	if (contenitore) {
+		const lat = Number(contenitore.dataset.lat);
+		const lon = Number(contenitore.dataset.lon);
+		const zoom = Number(contenitore.dataset.zoom);
+		const nome = contenitore.dataset.nome ?? '';
+		const indirizzo = contenitore.dataset.indirizzo ?? '';
+		const telefono = contenitore.dataset.telefono ?? '';
+		const email = contenitore.dataset.email ?? '';
+		const etichettaTelefono = contenitore.dataset.etichettaTelefono ?? '';
+		const etichettaEmail = contenitore.dataset.etichettaEmail ?? '';
+		const etichettaSito = contenitore.dataset.etichettaSito ?? '';
+		const sito = window.location.origin;
+
+		const mappa = L.map(contenitore, {
+			center: [lat, lon],
+			zoom,
+			scrollWheelZoom: false,
+		});
+
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+			maxZoom: 19,
+		}).addTo(mappa);
+
+		const iconaPoltrona = L.divIcon({
+			className: '',
+			html: `
+				<div style="position:relative;width:40px;height:48px;">
+					<div style="position:absolute;top:0;left:0;width:40px;height:40px;background:#b45309;border-radius:9999px 9999px 9999px 4px;transform:rotate(45deg);box-shadow:0 4px 10px rgba(0,0,0,0.35);"></div>
+					<svg viewBox="0 0 24 24" fill="white" style="position:absolute;top:6px;left:6px;width:22px;height:22px;">
+						<rect x="4" y="9" width="3.5" height="8" rx="1.4" />
+						<rect x="16.5" y="9" width="3.5" height="8" rx="1.4" />
+						<rect x="5.5" y="4" width="13" height="9" rx="2.2" />
+						<rect x="4.5" y="12.5" width="15" height="4.5" rx="1.6" />
+						<rect x="6" y="18.5" width="1.6" height="2.3" rx="0.5" />
+						<rect x="16.4" y="18.5" width="1.6" height="2.3" rx="0.5" />
+					</svg>
+				</div>
+			`,
+			iconSize: [40, 48],
+			iconAnchor: [20, 44],
+		});
+
+		const righeContatto = [
+			indirizzo ? `<p class="popup-indirizzo">${indirizzo}</p>` : '',
+			telefono
+				? `<p class="popup-riga"><a class="popup-link" href="tel:${telefono.replace(/\s+/g, '')}">${etichettaTelefono}: ${telefono}</a></p>`
+				: '',
+			email
+				? `<p class="popup-riga"><a class="popup-link" href="mailto:${email}">${etichettaEmail}: ${email}</a></p>`
+				: '',
+			`<p class="popup-riga"><a class="popup-link" href="${sito}">${etichettaSito}</a></p>`,
+		].join('');
+
+		const contenutoPopup = `
+			<div style="min-width:180px;padding:0.85rem 1rem;">
+				<p class="popup-nome">${nome}</p>
+				${righeContatto}
+			</div>
+		`;
+
+		L.marker([lat, lon], { icon: iconaPoltrona, alt: nome }).addTo(mappa).bindPopup(contenutoPopup);
+	}
+</script>

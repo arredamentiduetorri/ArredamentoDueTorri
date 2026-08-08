@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Lingua } from '../i18n/utils';
+import { percorso, traduzioni } from '../i18n/utils';
+import { iconePerSlug, slugProdotto, immagineSegnaposto } from '../lib/iconeProdotti';
+
+interface Props {
+	prodotto: CollectionEntry<'prodotti'>;
+	lang: Lingua;
+}
+
+const { prodotto, lang } = Astro.props;
+const t = traduzioni(lang);
+const { nome, categoria, immagine, immagini } = prodotto.data;
+const slug = slugProdotto(prodotto.id);
+const icona = immagineSegnaposto(immagine) ? iconePerSlug[slug] : undefined;
+const numeroFoto = immagini?.length ?? 0;
+---
+
+<a
+	href={percorso(lang, `/prodotti/${slug}`)}
+	data-categoria={categoria}
+	class="group flex flex-col overflow-hidden rounded-2xl border border-amber-200/70 bg-stone-50 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg dark:border-amber-900/40 dark:bg-stone-900 dark:hover:border-amber-700/60"
+>
+	<div class="relative aspect-[4/3] overflow-hidden">
+		{icona ? (
+			<div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-amber-100 to-amber-50 dark:from-stone-800 dark:to-stone-900">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-14 w-14 text-amber-700/50 dark:text-amber-400/40" fill="currentColor" set:html={icona} />
+			</div>
+		) : (
+			<img
+				src={immagine}
+				alt={nome}
+				loading="lazy"
+				class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+			/>
+		)}
+		{numeroFoto > 1 && (
+			<span class="absolute top-3 right-3 z-10 flex items-center gap-1 rounded-full bg-stone-900/60 px-2 py-1 text-[0.65rem] font-semibold text-white backdrop-blur-sm">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-3 w-3" fill="currentColor">
+					<path d="M4 4a2 2 0 00-2 2v6a2 2 0 002 2V6h8a2 2 0 00-2-2H4z" />
+					<path fill-rule="evenodd" d="M8 7a2 2 0 00-2 2v6a2 2 0 002 2h8a2 2 0 002-2V9a2 2 0 00-2-2H8zm0 2h8v6H8V9z" clip-rule="evenodd"></path>
+				</svg>
+				{numeroFoto}
+			</span>
+		)}
+	</div>
+	<div class="flex flex-1 flex-col p-5">
+		<span class="text-[0.65rem] font-semibold tracking-wider text-amber-700 uppercase dark:text-amber-400">{categoria}</span>
+		<h3 class="mt-1 font-semibold text-stone-900 dark:text-white">{nome}</h3>
+		<span
+			class="mt-auto flex items-center gap-1 pt-4 text-xs font-medium text-amber-700 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:text-amber-400"
+		>
+			{t.prodotti.scopriDiPiu}
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-3.5 w-3.5" fill="currentColor">
+				<path
+					fill-rule="evenodd"
+					d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+					clip-rule="evenodd"></path>
+			</svg>
+		</span>
+	</div>
+</a>

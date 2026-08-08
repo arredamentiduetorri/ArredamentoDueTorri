@@ -1,0 +1,66 @@
+export default {
+	nav: {
+		home: 'Home',
+		prodotti: 'Products',
+		chiSiamo: 'About us',
+		contatti: 'Contact',
+	},
+	meta: {
+		descrizione: 'Furniture store and custom home furnishings.',
+	},
+	home: {
+		heroEyebrow: 'From project to home',
+		heroTitle: 'Custom furniture for every room',
+		introHeading: 'A passion for design',
+		introTesto:
+			"Placeholder text: introduce the business here, your experience in the furniture industry and what makes your way of working with customers unique, from the first visit to delivery.",
+		ctaProdotti: 'Discover our products',
+		ctaPreventivo: 'Request a quote',
+		showroomAlt: 'Showroom',
+		collezioniHeading: 'Our collections',
+		collezioniTesto:
+			'Placeholder text: describe here the selection of materials and collaborations with craftsmen/manufacturers, the level of customisation offered and the attention to detail in every stage of the work.',
+		collezioniScopri: 'Explore',
+		categorie: {
+			soggiorno: 'Living room',
+			cameraDaLetto: 'Bedroom',
+			cucina: 'Kitchen',
+			complementi: 'Accessories',
+		},
+		recensioniHeading: 'What our customers say',
+		recensioniTesto: 'Reviews from people who chose Arredamenti Due Torri.',
+		recensioniBottone: 'Read all reviews on Google',
+		mappaSito: 'Website',
+	},
+	prodotti: {
+		titolo: 'Our products',
+		sottotitolo: 'A selection of the custom furniture we make, room by room.',
+		categorieLabel: 'Categories',
+		tutte: 'All',
+		tornaAiProdotti: 'Back to products',
+		richiediInfo: 'Request information',
+		scopriDiPiu: 'Discover',
+		altriProdotti: 'More products in this category',
+	},
+	chiSiamo: {
+		titolo: 'About us',
+	},
+	contatti: {
+		titolo: 'Contact',
+		indirizzo: 'Address',
+		telefono: 'Phone',
+		email: 'Email',
+		orari: 'Opening hours',
+		formNome: 'Name',
+		formEmail: 'Email',
+		formMessaggio: 'Message',
+		formInvia: 'Send request',
+	},
+	footer: {
+		orari: 'Opening hours',
+		linkUtili: 'Quick links',
+		dirittiRiservati: 'All rights reserved.',
+	},
+	temaToggle: 'Switch light/dark theme',
+	linguaToggle: 'Switch language',
+} as const;

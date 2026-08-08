@@ -1,0 +1,66 @@
+export default {
+	nav: {
+		home: 'Home',
+		prodotti: 'Prodotti',
+		chiSiamo: 'Chi siamo',
+		contatti: 'Contatti',
+	},
+	meta: {
+		descrizione: "Negozio di arredamento e complementi d'arredo su misura.",
+	},
+	home: {
+		heroEyebrow: 'Dal progetto alla casa',
+		heroTitle: 'Arredi su misura per ogni ambiente',
+		introHeading: 'Passione per il design',
+		introTesto:
+			"Testo segnaposto: presenta qui l'attività, l'esperienza nel settore arredamento e cosa rende unico il vostro modo di lavorare con i clienti, dal primo sopralluogo alla consegna.",
+		ctaProdotti: 'Scopri i prodotti',
+		ctaPreventivo: 'Richiedi un preventivo',
+		showroomAlt: 'Showroom',
+		collezioniHeading: 'Le nostre collezioni',
+		collezioniTesto:
+			"Testo segnaposto: raccontate qui la selezione di materiali e collaborazioni con artigiani/produttori, il livello di personalizzazione offerto e l'attenzione al dettaglio in ogni fase della lavorazione.",
+		collezioniScopri: 'Scopri',
+		categorie: {
+			soggiorno: 'Soggiorno',
+			cameraDaLetto: 'Camera da letto',
+			cucina: 'Cucina',
+			complementi: 'Complementi',
+		},
+		recensioniHeading: 'Cosa dicono i nostri clienti',
+		recensioniTesto: 'Le recensioni di chi ha scelto Arredamenti Due Torri.',
+		recensioniBottone: 'Leggi tutte le recensioni su Google',
+		mappaSito: 'Sito web',
+	},
+	prodotti: {
+		titolo: 'I nostri prodotti',
+		sottotitolo: 'Una selezione degli arredi che realizziamo su misura, ambiente per ambiente.',
+		categorieLabel: 'Categorie',
+		tutte: 'Tutte',
+		tornaAiProdotti: 'Torna ai prodotti',
+		richiediInfo: 'Richiedi informazioni',
+		scopriDiPiu: 'Scopri',
+		altriProdotti: 'Altri prodotti in questa categoria',
+	},
+	chiSiamo: {
+		titolo: 'Chi siamo',
+	},
+	contatti: {
+		titolo: 'Contatti',
+		indirizzo: 'Indirizzo',
+		telefono: 'Telefono',
+		email: 'Email',
+		orari: 'Orari',
+		formNome: 'Nome',
+		formEmail: 'Email',
+		formMessaggio: 'Messaggio',
+		formInvia: 'Invia richiesta',
+	},
+	footer: {
+		orari: 'Orari',
+		linkUtili: 'Link utili',
+		dirittiRiservati: 'Tutti i diritti riservati.',
+	},
+	temaToggle: 'Cambia tema chiaro/scuro',
+	linguaToggle: 'Cambia lingua',
+} as const;

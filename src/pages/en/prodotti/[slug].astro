@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import ProdottoDettaglio from '../../../components/pages/ProdottoDettaglio.astro';
+
+export async function getStaticPaths() {
+	const prodotti = await getCollection('prodotti', ({ id }) => id.startsWith('en/'));
+	return prodotti.map((prodotto) => ({
+		params: { slug: prodotto.id.replace(/^en\//, '') },
+		props: { prodotto },
+	}));
+}
+
+const { prodotto } = Astro.props;
+---
+
+<ProdottoDettaglio lang="en" prodotto={prodotto} />

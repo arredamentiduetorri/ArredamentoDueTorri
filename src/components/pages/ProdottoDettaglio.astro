@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../ProductCard.astro';
+import ShowroomCarousel from '../ShowroomCarousel.astro';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import type { Lingua } from '../../i18n/utils';
+import { percorso, traduzioni } from '../../i18n/utils';
+import { iconePerSlug, slugProdotto, immagineSegnaposto } from '../../lib/iconeProdotti';
+
+interface Props {
+	lang: Lingua;
+	prodotto: CollectionEntry<'prodotti'>;
+}
+
+const { lang, prodotto } = Astro.props;
+const t = traduzioni(lang);
+const { nome, categoria, immagine, immagini } = prodotto.data;
+const { Content } = await render(prodotto);
+const icona = immagineSegnaposto(immagine) ? iconePerSlug[slugProdotto(prodotto.id)] : undefined;
+const galleria = immagini && immagini.length > 0 ? immagini.map((src) => ({ src, alt: nome })) : undefined;
+
+const altriProdotti = await getCollection(
+	'prodotti',
+	(p) => p.id.startsWith(`${lang}/`) && p.data.categoria === categoria && p.id !== prodotto.id,
+);
+---
+
+<Layout titolo={nome}>
+	<section class="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+		<a
+			href={percorso(lang, '/prodotti')}
+			class="text-sm font-semibold text-stone-600 hover:text-amber-800 dark:text-stone-400 dark:hover:text-amber-500"
+		>
+			&larr; {t.prodotti.tornaAiProdotti}
+		</a>
+		<div class="mt-6 grid grid-cols-1 gap-10 md:grid-cols-2">
+			<div class="aspect-[4/3] overflow-hidden rounded-2xl border border-amber-200/70 dark:border-amber-900/40">
+				{icona ? (
+					<div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-amber-100 to-amber-50 dark:from-stone-800 dark:to-stone-900">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-24 w-24 text-amber-700/50 dark:text-amber-400/40" fill="currentColor" set:html={icona} />
+					</div>
+				) : galleria ? (
+					<ShowroomCarousel immagini={galleria} class="relative h-full w-full" indicatori />
+				) : (
+					<img src={immagine} alt={nome} class="h-full w-full object-cover" />
+				)}
+			</div>
+			<div>
+				<p class="text-xs font-semibold tracking-wide text-amber-700 uppercase dark:text-amber-400">{categoria}</p>
+				<h1 class="mt-1 text-3xl font-bold text-stone-900 dark:text-white">{nome}</h1>
+				<div class="prose prose-stone dark:prose-invert mt-6 max-w-none text-stone-700">
+					<Content />
+				</div>
+				<a
+					href={percorso(lang, '/contatti')}
+					class="mt-8 inline-block rounded-full bg-amber-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-amber-800 dark:bg-amber-600 dark:hover:bg-amber-500"
+				>
+					{t.prodotti.richiediInfo}
+				</a>
+			</div>
+		</div>
+
+		{altriProdotti.length > 0 && (
+			<div class="mt-20">
+				<h2 class="text-xs font-semibold tracking-wide text-stone-500 uppercase dark:text-stone-400">
+					{t.prodotti.altriProdotti}
+				</h2>
+				<div class="mt-4 h-px w-16 bg-amber-700 dark:bg-amber-500"></div>
+				<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+					{altriProdotti.slice(0, 3).map((correlato) => <ProductCard prodotto={correlato} lang={lang} />)}
+				</div>
+			</div>
+		)}
+	</section>
+</Layout>

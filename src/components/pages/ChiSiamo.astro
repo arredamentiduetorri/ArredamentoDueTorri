@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getEntry, render } from 'astro:content';
+import type { Lingua } from '../../i18n/utils';
+
+interface Props {
+	lang: Lingua;
+}
+
+const { lang } = Astro.props;
+const pagina = await getEntry('pagine', `${lang}/chi-siamo`);
+const { Content } = await render(pagina!);
+---
+
+<Layout titolo={pagina!.data.titolo}>
+	<section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+		<h1 class="text-3xl font-bold text-stone-900 dark:text-white">{pagina!.data.titolo}</h1>
+		<div class="prose prose-stone dark:prose-invert mt-6 max-w-none text-stone-700">
+			<Content />
+		</div>
+	</section>
+</Layout>

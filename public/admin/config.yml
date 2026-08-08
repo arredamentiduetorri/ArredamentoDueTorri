@@ -1,0 +1,114 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "prodotti-it"
+    label: "Prodotti (Italiano)"
+    label_singular: "Prodotto"
+    folder: "src/content/prodotti/it"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome prodotto", name: "nome", widget: "string" }
+      - label: "Categoria"
+        name: "categoria"
+        widget: "select"
+        options: ["Soggiorno", "Camera da letto", "Cucina", "Complementi"]
+      - label: "Prezzo"
+        name: "prezzo"
+        widget: "string"
+        required: false
+        hint: 'Es. "da 890 €" oppure "su preventivo"'
+      - { label: "Immagine", name: "immagine", widget: "image" }
+      - { label: "In evidenza in home", name: "inEvidenza", widget: "boolean", default: false }
+      - { label: "Descrizione", name: "body", widget: "markdown" }
+
+  - name: "prodotti-en"
+    label: "Products (English)"
+    label_singular: "Product"
+    folder: "src/content/prodotti/en"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Product name", name: "nome", widget: "string" }
+      - label: "Category"
+        name: "categoria"
+        widget: "select"
+        options: ["Living room", "Bedroom", "Kitchen", "Accessories"]
+      - label: "Price"
+        name: "prezzo"
+        widget: "string"
+        required: false
+        hint: 'E.g. "from €890" or "on quote"'
+      - { label: "Image", name: "immagine", widget: "image" }
+      - { label: "Featured on homepage", name: "inEvidenza", widget: "boolean", default: false }
+      - { label: "Description", name: "body", widget: "markdown" }
+
+  - name: "pagine-it"
+    label: "Pagine (Italiano)"
+    files:
+      - name: "chi-siamo"
+        label: "Chi siamo"
+        file: "src/content/pagine/it/chi-siamo.md"
+        fields:
+          - { label: "Titolo", name: "titolo", widget: "string" }
+          - { label: "Testo", name: "body", widget: "markdown" }
+      - name: "contatti"
+        label: "Contatti (testo introduttivo)"
+        file: "src/content/pagine/it/contatti.md"
+        fields:
+          - { label: "Titolo", name: "titolo", widget: "string" }
+          - { label: "Testo", name: "body", widget: "markdown" }
+
+  - name: "pagine-en"
+    label: "Pages (English)"
+    files:
+      - name: "chi-siamo"
+        label: "About us"
+        file: "src/content/pagine/en/chi-siamo.md"
+        fields:
+          - { label: "Title", name: "titolo", widget: "string" }
+          - { label: "Text", name: "body", widget: "markdown" }
+      - name: "contatti"
+        label: "Contact (intro text)"
+        file: "src/content/pagine/en/contatti.md"
+        fields:
+          - { label: "Title", name: "titolo", widget: "string" }
+          - { label: "Text", name: "body", widget: "markdown" }
+
+  - name: "recensioni"
+    label: "Recensioni"
+    label_singular: "Recensione"
+    folder: "src/content/recensioni"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nome cliente", name: "nome", widget: "string" }
+      - { label: "Fonte", name: "fonte", widget: "string", default: "Google" }
+      - { label: "Valutazione (1-5)", name: "valutazione", widget: "number", default: 5, min: 1, max: 5 }
+      - { label: "Luogo (es. \"Bologna, Italia\")", name: "luogo", widget: "string" }
+      - { label: "Testo recensione", name: "testo", widget: "text" }
+
+  - name: "impostazioni"
+    label: "Impostazioni generali"
+    files:
+      - name: "generale"
+        label: "Dati attività"
+        file: "src/content/impostazioni/generale.yaml"
+        fields:
+          - label: "Dati generali"
+            name: "generale"
+            widget: "object"
+            fields:
+              - { label: "Nome attività", name: "nomeAttivita", widget: "string" }
+              - { label: "Indirizzo", name: "indirizzo", widget: "string" }
+              - { label: "Telefono", name: "telefono", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Orari", name: "orari", widget: "string" }
+              - { label: "P.IVA", name: "piva", widget: "string", required: false }
+              - { label: "Facebook (URL)", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram (URL)", name: "instagram", widget: "string", required: false }

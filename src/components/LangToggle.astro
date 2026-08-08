@@ -1,0 +1,27 @@
+---
+import type { Lingua } from '../i18n/utils';
+import { percorsoAltraLingua, traduzioni } from '../i18n/utils';
+
+interface Props {
+	lang: Lingua;
+}
+
+const { lang } = Astro.props;
+const t = traduzioni(lang);
+const altraLingua: Lingua = lang === 'it' ? 'en' : 'it';
+const href = percorsoAltraLingua(lang, Astro.url.pathname);
+
+const bandiere: Record<Lingua, string> = {
+	it: '🇮🇹',
+	en: '🇬🇧',
+};
+---
+
+<a
+	href={href}
+	aria-label={t.linguaToggle}
+	title={t.linguaToggle}
+	class="flex shrink-0 items-center justify-center text-2xl leading-none opacity-90 transition-opacity hover:opacity-100"
+>
+	{bandiere[altraLingua]}
+</a>
