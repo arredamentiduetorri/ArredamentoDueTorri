@@ -40,8 +40,35 @@ const foto = [
 ---
 
 <Layout titolo={t.nav.home} headerTrasparente>
+	<section class="mx-auto max-w-6xl px-6 py-10 sm:px-10 sm:py-16 md:hidden">
+		<div class="grid grid-cols-1 items-center gap-14">
+			<div>
+				<p class="text-[13px] font-semibold tracking-[0.16em] text-clay-dark uppercase">{t.home.heroEyebrow}</p>
+				<h1 class="mt-5 text-5xl leading-[1.06] sm:text-6xl">{t.home.heroTitle}</h1>
+				<p class="mt-6 max-w-[40ch] text-lg leading-relaxed text-muted">{t.home.introTesto}</p>
+				<div class="mt-9 flex flex-wrap gap-3">
+					<a href={percorso(lang, '/contatti')} class="rounded-full bg-clay px-7 py-4 text-[15px] font-medium text-white transition-colors hover:bg-clay-dark">
+						{t.home.ctaPreventivo}
+					</a>
+					<a href={percorso(lang, '/prodotti')} class="rounded-full border border-line px-7 py-[15px] text-[15px] text-ink transition-colors hover:bg-sand">
+						{t.home.ctaProdotti}
+					</a>
+				</div>
+			</div>
+			<div class="relative">
+				<div class="aspect-[4/5] overflow-hidden rounded-t-[200px] rounded-b-3xl">
+					<img src={foto[0].src} alt={t.home.showroomAlt} class="h-full w-full object-cover" />
+				</div>
+				<div class="absolute -left-6 bottom-9 rounded-2xl bg-cream px-6 py-5 shadow-xl">
+					<p class="font-heading text-3xl text-clay-dark">5,0</p>
+					<p class="mt-0.5 text-[13px] text-faint">su Google, {recensioni.length} recensioni</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<section
-		class="relative flex h-[82vh] max-h-[820px] min-h-[560px] items-center"
+		class="relative hidden h-[82vh] max-h-[820px] min-h-[560px] items-center md:flex"
 		style="margin-top: calc(-1 * var(--altezza-header, 88px)); padding-top: var(--altezza-header, 88px);"
 	>
 		<HeroCarousel immagini={foto} class="absolute inset-0 h-full w-full" />

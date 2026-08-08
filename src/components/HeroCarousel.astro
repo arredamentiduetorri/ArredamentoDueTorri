@@ -33,6 +33,31 @@ const { immagini, class: className } = Astro.props;
 			</div>
 		)
 	}
+
+	{
+		immagini.length > 1 && (
+			<>
+				<button
+					type="button"
+					class="carosello-freccia carosello-freccia-prec pointer-events-auto absolute top-1/2 left-3 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/35 text-cream backdrop-blur transition-colors hover:bg-ink/55 sm:left-5 sm:h-11 sm:w-11"
+					aria-label="Immagine precedente"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-5 w-5" fill="currentColor">
+						<path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 010 1.06L9.06 10l3.73 3.71a.75.75 0 11-1.06 1.06l-4.25-4.25a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 0z" clip-rule="evenodd" />
+					</svg>
+				</button>
+				<button
+					type="button"
+					class="carosello-freccia carosello-freccia-succ pointer-events-auto absolute top-1/2 right-3 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/35 text-cream backdrop-blur transition-colors hover:bg-ink/55 sm:right-5 sm:h-11 sm:w-11"
+					aria-label="Immagine successiva"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-5 w-5" fill="currentColor">
+						<path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01-.02-1.06L10.92 10 7.19 6.29a.75.75 0 111.06-1.06l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.04.02z" clip-rule="evenodd" />
+					</svg>
+				</button>
+			</>
+		)
+	}
 </div>
 
 <style>
@@ -67,6 +92,8 @@ const { immagini, class: className } = Astro.props;
 		document.querySelectorAll('.carosello-hero').forEach((carosello) => {
 			const slide = Array.from(carosello.querySelectorAll('.carosello-slide'));
 			const pallini = Array.from(carosello.querySelectorAll('.carosello-pallino'));
+			const frecciaPrec = carosello.querySelector('.carosello-freccia-prec');
+			const frecciaSucc = carosello.querySelector('.carosello-freccia-succ');
 			if (slide.length < 2) return;
 
 			let indiceAttivo = 0;
@@ -84,6 +111,10 @@ const { immagini, class: className } = Astro.props;
 				vai((indiceAttivo + 1) % slide.length);
 			}
 
+			function indietro() {
+				vai((indiceAttivo - 1 + slide.length) % slide.length);
+			}
+
 			function avvia() {
 				ferma();
 				timer = window.setInterval(avanti, 5000);
@@ -98,6 +129,15 @@ const { immagini, class: className } = Astro.props;
 					vai(i);
 					if (!riduciMovimento) avvia();
 				});
+			});
+
+			frecciaPrec?.addEventListener('click', () => {
+				indietro();
+				if (!riduciMovimento) avvia();
+			});
+			frecciaSucc?.addEventListener('click', () => {
+				avanti();
+				if (!riduciMovimento) avvia();
 			});
 
 			if (riduciMovimento) return;
