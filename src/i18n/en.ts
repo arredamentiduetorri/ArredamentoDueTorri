@@ -87,4 +87,11 @@ export default {
 		privacy: 'Privacy',
 	},
 	linguaToggle: 'Switch language',
+	errore404: {
+		titolo: 'Page not found',
+		heading: "This page doesn't exist",
+		testo: "The link might be wrong, or the page has moved. Try going back to the home page or take a look at our products.",
+		bottoneHome: 'Back to home',
+		bottoneProdotti: 'Go to products',
+	},
 } as const;

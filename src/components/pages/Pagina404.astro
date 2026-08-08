@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import type { Lingua } from '../../i18n/utils';
+import { percorso, traduzioni } from '../../i18n/utils';
+
+interface Props {
+	lang: Lingua;
+}
+
+const { lang } = Astro.props;
+const t = traduzioni(lang);
+---
+
+<Layout titolo={t.errore404.titolo} noIndex>
+	<section class="mx-auto flex max-w-2xl flex-col items-center px-6 py-24 text-center sm:px-10 sm:py-32">
+		<p class="font-heading text-6xl text-clay-dark">404</p>
+		<h1 class="mt-4.5 text-4xl leading-[1.1]">{t.errore404.heading}</h1>
+		<p class="mt-4.5 max-w-[46ch] text-lg leading-relaxed text-muted">{t.errore404.testo}</p>
+		<div class="mt-9 flex flex-wrap justify-center gap-3">
+			<a href={percorso(lang, '/')} class="rounded-full bg-clay px-7 py-4 text-[15px] font-medium text-white transition-colors hover:bg-clay-dark">
+				{t.errore404.bottoneHome}
+			</a>
+			<a href={percorso(lang, '/prodotti')} class="rounded-full border border-line px-7 py-[15px] text-[15px] text-ink transition-colors hover:bg-sand">
+				{t.errore404.bottoneProdotti}
+			</a>
+		</div>
+	</section>
+</Layout>

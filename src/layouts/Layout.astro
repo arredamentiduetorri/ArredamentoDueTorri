@@ -10,12 +10,13 @@ interface Props {
 	descrizione?: string;
 	immagine?: string;
 	headerTrasparente?: boolean;
+	noIndex?: boolean;
 }
 
 const lang = rilevaLingua(Astro.url);
 const t = traduzioni(lang);
 
-const { titolo, descrizione = t.meta.descrizione, immagine = '/images/shop.jpeg', headerTrasparente = false } = Astro.props;
+const { titolo, descrizione = t.meta.descrizione, immagine = '/images/shop.jpeg', headerTrasparente = false, noIndex = false } = Astro.props;
 
 const urlCanonico = new URL(Astro.url.pathname, Astro.site);
 const urlAltraLingua = new URL(percorsoAltraLingua(lang, Astro.url.pathname), Astro.site);
@@ -34,10 +35,16 @@ const titoloCompleto = `${titolo} · Arredamento Due Torri`;
 		<meta name="generator" content={Astro.generator} />
 		<title>{titoloCompleto}</title>
 
-		<link rel="canonical" href={urlCanonico} />
-		<link rel="alternate" hreflang="it" href={lang === 'it' ? urlCanonico : urlAltraLingua} />
-		<link rel="alternate" hreflang="en" href={lang === 'en' ? urlCanonico : urlAltraLingua} />
-		<link rel="alternate" hreflang="x-default" href={lang === 'it' ? urlCanonico : urlAltraLingua} />
+		{noIndex ? (
+			<meta name="robots" content="noindex, nofollow" />
+		) : (
+			<Fragment>
+				<link rel="canonical" href={urlCanonico} />
+				<link rel="alternate" hreflang="it" href={lang === 'it' ? urlCanonico : urlAltraLingua} />
+				<link rel="alternate" hreflang="en" href={lang === 'en' ? urlCanonico : urlAltraLingua} />
+				<link rel="alternate" hreflang="x-default" href={lang === 'it' ? urlCanonico : urlAltraLingua} />
+			</Fragment>
+		)}
 
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Arredamento Due Torri" />
