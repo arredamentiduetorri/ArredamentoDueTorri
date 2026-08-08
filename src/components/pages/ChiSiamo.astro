@@ -37,20 +37,114 @@ const tappe = pagina!.data.tappe ?? [];
 				<p class="mx-auto mt-3.5 max-w-[52ch] text-[17px] leading-relaxed text-muted">{t.chiSiamo.storiaTesto}</p>
 			</div>
 
-			<div class="mt-16 flex flex-col gap-14">
-				{tappe.map((tappa, i) => (
-					<div class="grid grid-cols-1 items-center gap-14 md:grid-cols-2">
-						<div class:list={[i % 2 === 0 ? 'md:order-1' : 'md:order-2', 'aspect-[5/4] overflow-hidden rounded-[2rem]']}>
-							<img src={tappa.immagine} alt={tappa.titolo} loading="lazy" class="h-full w-full object-cover" />
+			<div id="cronologia" class="relative mt-16">
+				<div class="pointer-events-none absolute inset-y-1 left-1/2 hidden w-px -translate-x-1/2 bg-line md:block" aria-hidden="true"></div>
+				<div
+					id="cronologia-progresso"
+					class="pointer-events-none absolute top-1 left-1/2 hidden w-px -translate-x-1/2 bg-clay md:block"
+					style="height: 0px"
+					aria-hidden="true"
+				>
+				</div>
+
+				<div class="flex flex-col gap-14">
+					{tappe.map((tappa, i) => (
+						<div class="tappa grid grid-cols-1 items-center gap-14 md:grid-cols-2">
+							<div class:list={[i % 2 === 0 ? 'md:order-1' : 'md:order-2', 'tappa-immagine aspect-[5/4] overflow-hidden rounded-[2rem]']}>
+								<img src={tappa.immagine} alt={tappa.titolo} loading="lazy" class="h-full w-full object-cover" />
+							</div>
+							<div class:list={[i % 2 === 0 ? 'md:order-2' : 'md:order-1']}>
+								<span class="tappa-numero flex h-9.5 w-9.5 items-center justify-center rounded-full bg-[#efe1d6] font-heading text-[16px] text-clay-dark">{i + 1}</span>
+								<h3 class="tappa-titolo mt-4.5 text-[28px]">{tappa.titolo}</h3>
+								<p class="tappa-testo mt-3 text-base leading-relaxed">{tappa.testo}</p>
+							</div>
 						</div>
-						<div class:list={[i % 2 === 0 ? 'md:order-2' : 'md:order-1']}>
-							<span class="flex h-9.5 w-9.5 items-center justify-center rounded-full bg-[#efe1d6] font-heading text-[16px] text-clay-dark">{i + 1}</span>
-							<h3 class="mt-4.5 text-[28px]">{tappa.titolo}</h3>
-							<p class="mt-3 text-base leading-relaxed text-muted">{tappa.testo}</p>
-						</div>
-					</div>
-				))}
+					))}
+				</div>
 			</div>
 		</section>
 	)}
 </Layout>
+
+<style>
+	.tappa-immagine {
+		transform: scale(1);
+		transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.tappa-numero,
+	.tappa-titolo,
+	.tappa-testo {
+		transition:
+			color 0.5s ease,
+			background-color 0.5s ease;
+	}
+	.tappa:not(.is-active) .tappa-titolo,
+	.tappa:not(.is-active) .tappa-testo {
+		color: var(--color-faint);
+	}
+	.tappa.is-active .tappa-immagine {
+		transform: scale(1.045);
+	}
+	.tappa.is-active .tappa-numero {
+		background-color: var(--color-clay);
+		color: white;
+	}
+	.tappa.is-active .tappa-titolo {
+		color: var(--color-ink);
+	}
+	.tappa.is-active .tappa-testo {
+		color: var(--color-muted);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.tappa-immagine,
+		.tappa-numero,
+		.tappa-titolo,
+		.tappa-testo {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	(function () {
+		const cronologia = document.getElementById('cronologia');
+		const progresso = document.getElementById('cronologia-progresso');
+		const tappe = Array.from(document.querySelectorAll('.tappa'));
+		if (!cronologia || !progresso || tappe.length === 0) return;
+
+		function aggiornaProgresso() {
+			const rect = cronologia.getBoundingClientRect();
+			const centro = window.innerHeight / 2;
+			const percorsi = Math.min(Math.max(centro - rect.top, 0), rect.height);
+			progresso.style.height = `${percorsi}px`;
+		}
+
+		let richiesto = false;
+		function onScroll() {
+			if (richiesto) return;
+			richiesto = true;
+			requestAnimationFrame(() => {
+				aggiornaProgresso();
+				richiesto = false;
+			});
+		}
+
+		window.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', onScroll);
+		aggiornaProgresso();
+
+		if ('IntersectionObserver' in window) {
+			const osservatore = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						entry.target.classList.toggle('is-active', entry.isIntersecting);
+					});
+				},
+				{ rootMargin: '-45% 0px -45% 0px', threshold: 0 },
+			);
+			tappe.forEach((tappa) => osservatore.observe(tappa));
+		} else {
+			tappe.forEach((tappa) => tappa.classList.add('is-active'));
+		}
+	})();
+</script>
