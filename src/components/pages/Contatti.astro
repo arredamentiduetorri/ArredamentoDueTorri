@@ -72,6 +72,9 @@ const formName = `contatti-${lang}`;
 				<button type="submit" class="self-start rounded-full bg-clay px-9 py-4 text-base font-medium text-white transition-colors hover:bg-clay-dark">
 					{t.contatti.formInvia}
 				</button>
+				<p class="text-sm text-faint">
+					{t.contatti.consensoPre} <a href={percorso(lang, '/privacy')} class="underline hover:text-ink">{t.contatti.consensoLink}</a>.
+				</p>
 			</form>
 		</div>
 	</section>

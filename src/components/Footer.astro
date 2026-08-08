@@ -20,6 +20,19 @@ const anno = new Date().getFullYear();
 		<div>
 			<p class="font-heading text-xl text-ink">{dati?.nomeAttivita}</p>
 			<p class="mt-3.5 text-[15px] leading-relaxed text-muted">{dati?.indirizzo}</p>
+			{dati?.facebook && (
+				<a
+					href={dati.facebook}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="Facebook"
+					class="mt-4.5 flex h-9 w-9 items-center justify-center rounded-full bg-cream text-ink transition-colors hover:bg-clay hover:text-white"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="currentColor">
+						<path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z" />
+					</svg>
+				</a>
+			)}
 		</div>
 		<div>
 			<p class="text-xs font-semibold tracking-[0.16em] text-clay-dark uppercase">{t.contatti.titolo}</p>
@@ -39,7 +52,8 @@ const anno = new Date().getFullYear();
 			</ul>
 		</div>
 	</div>
-	<div class="border-t border-line px-6 py-5 text-[13px] text-faint sm:px-10">
-		&copy; {anno} {dati?.nomeAttivita}. {t.footer.dirittiRiservati}
+	<div class="flex flex-wrap items-center justify-between gap-3 border-t border-line px-6 py-5 text-[13px] text-faint sm:px-10">
+		<p>&copy; {anno} {dati?.nomeAttivita}. {t.footer.dirittiRiservati}</p>
+		<a href={percorso(lang, '/privacy')} class="text-faint hover:text-ink">{t.footer.privacy}</a>
 	</div>
 </footer>

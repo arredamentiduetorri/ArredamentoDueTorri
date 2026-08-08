@@ -75,6 +75,8 @@ export default {
 		formEmail: 'Email',
 		formMessaggio: 'Raccontaci lo spazio',
 		formInvia: 'Invia la richiesta',
+		consensoPre: 'Inviando il modulo accetti la nostra',
+		consensoLink: 'informativa privacy',
 		grazieTitolo: 'Richiesta ricevuta',
 		grazieTesto: 'Grazie, abbiamo ricevuto il tuo messaggio. Ti risponderemo il prima possibile, di solito entro un giorno lavorativo.',
 		grazieBottone: 'Torna alla home',
@@ -83,6 +85,7 @@ export default {
 		orari: 'Orari',
 		linkUtili: 'Link utili',
 		dirittiRiservati: 'Tutti i diritti riservati.',
+		privacy: 'Privacy',
 	},
 	linguaToggle: 'Cambia lingua',
 } as const;

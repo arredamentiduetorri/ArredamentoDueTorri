@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout titolo="Pagina non trovata">
+	<section class="mx-auto flex max-w-2xl flex-col items-center px-6 py-24 text-center sm:px-10 sm:py-32">
+		<p class="font-heading text-6xl text-clay-dark">404</p>
+		<h1 class="mt-4.5 text-4xl leading-[1.1]">Questa pagina non esiste</h1>
+		<p class="mt-4.5 max-w-[46ch] text-lg leading-relaxed text-muted">
+			Il link potrebbe essere sbagliato o la pagina è stata spostata. Prova a tornare alla home o a dare un'occhiata ai nostri prodotti.
+		</p>
+		<div class="mt-9 flex flex-wrap justify-center gap-3">
+			<a href="/" class="rounded-full bg-clay px-7 py-4 text-[15px] font-medium text-white transition-colors hover:bg-clay-dark">
+				Torna alla home
+			</a>
+			<a href="/prodotti" class="rounded-full border border-line px-7 py-[15px] text-[15px] text-ink transition-colors hover:bg-sand">
+				Vai ai prodotti
+			</a>
+		</div>
+	</section>
+</Layout>

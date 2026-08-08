@@ -74,6 +74,12 @@ collections:
         fields:
           - { label: "Titolo", name: "titolo", widget: "string" }
           - { label: "Testo", name: "body", widget: "markdown" }
+      - name: "privacy"
+        label: "Informativa privacy"
+        file: "src/content/pagine/it/privacy.md"
+        fields:
+          - { label: "Titolo", name: "titolo", widget: "string" }
+          - { label: "Testo", name: "body", widget: "markdown" }
 
   - name: "pagine-en"
     label: "Pages (English)"
@@ -96,6 +102,12 @@ collections:
       - name: "contatti"
         label: "Contact (intro text)"
         file: "src/content/pagine/en/contatti.md"
+        fields:
+          - { label: "Title", name: "titolo", widget: "string" }
+          - { label: "Text", name: "body", widget: "markdown" }
+      - name: "privacy"
+        label: "Privacy policy"
+        file: "src/content/pagine/en/privacy.md"
         fields:
           - { label: "Title", name: "titolo", widget: "string" }
           - { label: "Text", name: "body", widget: "markdown" }
