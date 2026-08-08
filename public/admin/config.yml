@@ -24,7 +24,7 @@ collections:
         required: false
         hint: 'Es. "da 890 €" oppure "su preventivo"'
       - { label: "Immagine di copertina", name: "immagine", widget: "image" }
-      - { label: "Altre immagini (galleria)", name: "immagini", widget: "list", field: { widget: "image" }, required: false }
+      - { label: "Altre immagini (galleria)", name: "immagini", widget: "list", field: { label: "Immagine", name: "image", widget: "image" }, required: false }
       - { label: "In evidenza in home", name: "inEvidenza", widget: "boolean", default: false }
       - { label: "Descrizione", name: "body", widget: "markdown" }
 
@@ -46,7 +46,7 @@ collections:
         required: false
         hint: 'E.g. "from €890" or "on quote"'
       - { label: "Cover image", name: "immagine", widget: "image" }
-      - { label: "More images (gallery)", name: "immagini", widget: "list", field: { widget: "image" }, required: false }
+      - { label: "More images (gallery)", name: "immagini", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
       - { label: "Featured on homepage", name: "inEvidenza", widget: "boolean", default: false }
       - { label: "Description", name: "body", widget: "markdown" }
 
