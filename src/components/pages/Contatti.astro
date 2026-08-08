@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import MappaContatti from '../MappaContatti.astro';
 import { getEntry, render } from 'astro:content';
 import type { Lingua } from '../../i18n/utils';
-import { traduzioni } from '../../i18n/utils';
+import { percorso, traduzioni } from '../../i18n/utils';
 
 interface Props {
 	lang: Lingua;
@@ -53,7 +53,7 @@ const formName = `contatti-${lang}`;
 				</div>
 			</div>
 
-			<form name={formName} method="POST" data-netlify="true" class="flex flex-col gap-6">
+			<form name={formName} method="POST" data-netlify="true" action={percorso(lang, '/grazie')} class="flex flex-col gap-6">
 				<input type="hidden" name="form-name" value={formName} />
 				<div class="grid grid-cols-1 gap-4.5 sm:grid-cols-2">
 					<div class="flex flex-col gap-2">

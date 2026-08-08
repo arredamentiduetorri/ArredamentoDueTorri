@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shimmering-bavarois-9c9ccf.netlify.app/sitemap-index.xml

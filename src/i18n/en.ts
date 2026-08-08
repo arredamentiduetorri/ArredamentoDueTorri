@@ -74,6 +74,9 @@ export default {
 		formEmail: 'Email',
 		formMessaggio: 'Tell us about your space',
 		formInvia: 'Send request',
+		grazieTitolo: 'Request received',
+		grazieTesto: "Thank you, we've received your message. We'll get back to you as soon as possible, usually within one business day.",
+		grazieBottone: 'Back to home',
 	},
 	footer: {
 		orari: 'Opening hours',

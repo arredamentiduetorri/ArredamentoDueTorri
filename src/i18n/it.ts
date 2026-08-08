@@ -75,6 +75,9 @@ export default {
 		formEmail: 'Email',
 		formMessaggio: 'Raccontaci lo spazio',
 		formInvia: 'Invia la richiesta',
+		grazieTitolo: 'Richiesta ricevuta',
+		grazieTesto: 'Grazie, abbiamo ricevuto il tuo messaggio. Ti risponderemo il prima possibile, di solito entro un giorno lavorativo.',
+		grazieBottone: 'Torna alla home',
 	},
 	footer: {
 		orari: 'Orari',
