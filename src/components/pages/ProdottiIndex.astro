@@ -20,80 +20,34 @@ const categorie = [...new Set(prodotti.map((p) => p.data.categoria))].map((nome)
 ---
 
 <Layout titolo={t.prodotti.titolo}>
-	<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-		<div class="text-center">
-			<h1 class="text-3xl font-bold text-stone-900 dark:text-white">{t.prodotti.titolo}</h1>
-			<p class="mx-auto mt-3 max-w-xl text-stone-600 dark:text-stone-400">{t.prodotti.sottotitolo}</p>
-		</div>
+	<section class="mx-auto max-w-6xl px-6 py-16 sm:px-10">
+		<p class="text-[13px] font-semibold tracking-[0.16em] text-clay-dark uppercase">{t.prodotti.categorieLabel}</p>
+		<h1 class="mt-4.5 text-6xl">{t.prodotti.titolo}</h1>
+		<p class="mt-4 max-w-[56ch] text-lg leading-relaxed text-muted">{t.prodotti.sottotitolo}</p>
 
-		<div id="pagina-prodotti" class="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-[220px_1fr]">
-			<!-- Filtro categorie: chip orizzontali scorrevoli su mobile, colonna fissa su desktop -->
-			<div class="flex gap-2 overflow-x-auto pb-1 lg:hidden">
-				<button
-					type="button"
-					data-filtro="tutte"
-					aria-current="true"
-					class="filtro-btn shrink-0 rounded-full border border-amber-700 bg-amber-700 px-4 py-2 text-xs font-semibold whitespace-nowrap text-white transition-colors dark:border-amber-600 dark:bg-amber-600"
-				>
-					{t.prodotti.tutte} <span class="opacity-80">({prodotti.length})</span>
+		<div id="pagina-prodotti" class="mt-10">
+			<div class="flex flex-wrap gap-2">
+				<button type="button" data-filtro="tutte" aria-current="true" class="filtro-btn rounded-full border px-5 py-2.5 text-[15px] transition-colors border-clay bg-clay text-white">
+					{t.prodotti.tutte} <span class="opacity-60">({prodotti.length})</span>
 				</button>
 				{categorie.map((cat) => (
-					<button
-						type="button"
-						data-filtro={cat.nome}
-						class="filtro-btn shrink-0 rounded-full border border-amber-200 bg-stone-50 px-4 py-2 text-xs font-semibold whitespace-nowrap text-stone-700 transition-colors dark:border-amber-900/40 dark:bg-stone-900 dark:text-stone-300"
-					>
-						{cat.nome} <span class="opacity-70">({cat.conteggio})</span>
+					<button type="button" data-filtro={cat.nome} class="filtro-btn rounded-full border border-line px-5 py-2.5 text-[15px] text-muted transition-colors">
+						{cat.nome} <span class="opacity-60">({cat.conteggio})</span>
 					</button>
 				))}
 			</div>
 
-			<aside class="hidden lg:block">
-				<nav class="sticky top-24 rounded-2xl border border-amber-200/70 bg-stone-50 p-5 dark:border-amber-900/40 dark:bg-stone-900">
-					<p class="text-xs font-semibold tracking-wide text-stone-500 uppercase dark:text-stone-400">
-						{t.prodotti.categorieLabel}
-					</p>
-					<ul class="mt-3 space-y-1">
-						<li>
-							<button
-								type="button"
-								data-filtro="tutte"
-								aria-current="true"
-								class="filtro-btn flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-semibold text-white transition-colors bg-amber-700 dark:bg-amber-600"
-							>
-								{t.prodotti.tutte}
-								<span class="text-xs opacity-80">{prodotti.length}</span>
-							</button>
-						</li>
-						{categorie.map((cat) => (
-							<li>
-								<button
-									type="button"
-									data-filtro={cat.nome}
-									class="filtro-btn flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-medium text-stone-700 transition-colors hover:bg-amber-100/70 dark:text-stone-300 dark:hover:bg-amber-900/30"
-								>
-									{cat.nome}
-									<span class="text-xs text-stone-400 dark:text-stone-500">{cat.conteggio}</span>
-								</button>
-							</li>
-						))}
-					</ul>
-				</nav>
-			</aside>
-
-			<div>
-				<div id="griglia-prodotti" class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-					{prodotti.map((prodotto) => <ProductCard prodotto={prodotto} lang={lang} />)}
-				</div>
-				<nav id="pager-prodotti" class="mt-10 flex items-center justify-center gap-1" aria-label="Paginazione"></nav>
+			<div id="griglia-prodotti" class="mt-9 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+				{prodotti.map((prodotto) => <ProductCard prodotto={prodotto} lang={lang} />)}
 			</div>
+			<nav id="pager-prodotti" class="mt-12 flex items-center justify-center gap-1" aria-label="Paginazione"></nav>
 		</div>
 	</section>
 </Layout>
 
 <script>
 	(function () {
-		const DIMENSIONE_PAGINA = 6;
+		const DIMENSIONE_PAGINA = 9;
 		const contenitore = document.getElementById('pagina-prodotti');
 		const griglia = document.getElementById('griglia-prodotti');
 		const pager = document.getElementById('pager-prodotti');
@@ -115,8 +69,8 @@ const categorie = [...new Set(prodotti.map((p) => p.data.categoria))].map((nome)
 			b.textContent = contenuto;
 			b.disabled = disabilitato;
 			b.className = attivo
-				? 'flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-700 text-sm font-semibold text-white dark:bg-amber-600'
-				: 'flex h-9 min-w-9 shrink-0 items-center justify-center rounded-full px-2 text-sm font-medium text-stone-600 transition-colors hover:bg-amber-100/70 disabled:opacity-30 disabled:hover:bg-transparent dark:text-stone-300 dark:hover:bg-amber-900/30';
+				? 'flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-clay text-sm text-white'
+				: 'flex h-10 min-w-10 shrink-0 items-center justify-center rounded-full px-2 text-sm text-muted transition-colors hover:bg-sand disabled:opacity-30 disabled:hover:bg-transparent';
 			if (onClick && !disabilitato) b.addEventListener('click', onClick);
 			return b;
 		}
@@ -124,21 +78,18 @@ const categorie = [...new Set(prodotti.map((p) => p.data.categoria))].map((nome)
 		function vaiAllaPagina(pagina: number) {
 			paginaAttiva = pagina;
 			aggiorna();
-			griglia.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			griglia?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}
 
 		function renderPager(totalePagine: number) {
+			if (!pager) return;
 			pager.innerHTML = '';
 			if (totalePagine <= 1) return;
-			pager.appendChild(
-				bottonePager('‹', { disabilitato: paginaAttiva === 1 }, () => vaiAllaPagina(paginaAttiva - 1)),
-			);
+			pager.appendChild(bottonePager('‹', { disabilitato: paginaAttiva === 1 }, () => vaiAllaPagina(paginaAttiva - 1)));
 			for (let i = 1; i <= totalePagine; i++) {
 				pager.appendChild(bottonePager(String(i), { attivo: i === paginaAttiva }, () => vaiAllaPagina(i)));
 			}
-			pager.appendChild(
-				bottonePager('›', { disabilitato: paginaAttiva === totalePagine }, () => vaiAllaPagina(paginaAttiva + 1)),
-			);
+			pager.appendChild(bottonePager('›', { disabilitato: paginaAttiva === totalePagine }, () => vaiAllaPagina(paginaAttiva + 1)));
 		}
 
 		function aggiorna() {
@@ -149,9 +100,7 @@ const categorie = [...new Set(prodotti.map((p) => p.data.categoria))].map((nome)
 			const fine = inizio + DIMENSIONE_PAGINA;
 
 			schede.forEach((scheda) => scheda.classList.add('hidden'));
-			filtrate.forEach((scheda, i) => {
-				scheda.classList.toggle('hidden', i < inizio || i >= fine);
-			});
+			filtrate.forEach((scheda, i) => scheda.classList.toggle('hidden', i < inizio || i >= fine));
 
 			renderPager(totalePagine);
 		}
@@ -162,21 +111,16 @@ const categorie = [...new Set(prodotti.map((p) => p.data.categoria))].map((nome)
 			bottoniFiltro.forEach((bottone) => {
 				const attivo = bottone.dataset.filtro === filtro;
 				bottone.setAttribute('aria-current', String(attivo));
-				bottone.classList.toggle('bg-amber-700', attivo);
+				bottone.classList.toggle('bg-clay', attivo);
+				bottone.classList.toggle('border-clay', attivo);
 				bottone.classList.toggle('text-white', attivo);
-				bottone.classList.toggle('border-amber-700', attivo);
-				bottone.classList.toggle('bg-stone-50', !attivo);
-				bottone.classList.toggle('text-stone-700', !attivo);
-				bottone.classList.toggle('border-amber-200', !attivo);
-				bottone.classList.toggle('hover:bg-amber-100/70', !attivo);
-				bottone.classList.toggle('dark:hover:bg-amber-900/30', !attivo);
+				bottone.classList.toggle('border-line', !attivo);
+				bottone.classList.toggle('text-muted', !attivo);
 			});
 			aggiorna();
 		}
 
-		bottoniFiltro.forEach((bottone) => {
-			bottone.addEventListener('click', () => applicaFiltro(bottone.dataset.filtro ?? 'tutte'));
-		});
+		bottoniFiltro.forEach((bottone) => bottone.addEventListener('click', () => applicaFiltro(bottone.dataset.filtro ?? 'tutte')));
 
 		aggiorna();
 	})();

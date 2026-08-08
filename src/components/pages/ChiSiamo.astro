@@ -2,21 +2,55 @@
 import Layout from '../../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 import type { Lingua } from '../../i18n/utils';
+import { traduzioni } from '../../i18n/utils';
 
 interface Props {
 	lang: Lingua;
 }
 
 const { lang } = Astro.props;
+const t = traduzioni(lang);
 const pagina = await getEntry('pagine', `${lang}/chi-siamo`);
 const { Content } = await render(pagina!);
+const tappe = pagina!.data.tappe ?? [];
 ---
 
 <Layout titolo={pagina!.data.titolo}>
-	<section class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-		<h1 class="text-3xl font-bold text-stone-900 dark:text-white">{pagina!.data.titolo}</h1>
-		<div class="prose prose-stone dark:prose-invert mt-6 max-w-none text-stone-700">
-			<Content />
+	<section class="mx-auto max-w-6xl px-6 py-16 sm:px-10">
+		<div class="grid grid-cols-1 items-center gap-14 md:grid-cols-2">
+			<div>
+				<h1 class="text-6xl">{pagina!.data.titolo}</h1>
+				<div class="prose prose-neutral mt-6 max-w-none text-[17px] leading-relaxed text-muted">
+					<Content />
+				</div>
+			</div>
+			<div class="aspect-[4/5] overflow-hidden rounded-t-[200px] rounded-b-3xl">
+				<img src="/images/storia/08-oggi.jpg" alt={pagina!.data.titolo} class="h-full w-full object-cover" />
+			</div>
 		</div>
 	</section>
+
+	{tappe.length > 0 && (
+		<section class="mx-auto max-w-6xl px-6 py-20 sm:px-10">
+			<div class="text-center">
+				<h2 class="text-4xl">{t.chiSiamo.storiaHeading}</h2>
+				<p class="mx-auto mt-3.5 max-w-[52ch] text-[17px] leading-relaxed text-muted">{t.chiSiamo.storiaTesto}</p>
+			</div>
+
+			<div class="mt-16 flex flex-col gap-14">
+				{tappe.map((tappa, i) => (
+					<div class="grid grid-cols-1 items-center gap-14 md:grid-cols-2">
+						<div class:list={[i % 2 === 0 ? 'md:order-1' : 'md:order-2', 'aspect-[5/4] overflow-hidden rounded-[2rem]']}>
+							<img src={tappa.immagine} alt={tappa.titolo} loading="lazy" class="h-full w-full object-cover" />
+						</div>
+						<div class:list={[i % 2 === 0 ? 'md:order-2' : 'md:order-1']}>
+							<span class="flex h-9.5 w-9.5 items-center justify-center rounded-full bg-[#efe1d6] font-heading text-[16px] text-clay-dark">{i + 1}</span>
+							<h3 class="mt-4.5 text-[28px]">{tappa.titolo}</h3>
+							<p class="mt-3 text-base leading-relaxed text-muted">{tappa.testo}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</section>
+	)}
 </Layout>

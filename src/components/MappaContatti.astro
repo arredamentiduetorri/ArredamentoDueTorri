@@ -46,59 +46,40 @@ const {
 	#mappa-contatti :global(.leaflet-tile-pane) {
 		filter: grayscale(15%);
 	}
-	:global(html.dark) #mappa-contatti :global(.leaflet-tile-pane) {
-		filter: invert(1) hue-rotate(180deg) grayscale(0) brightness(0.95);
-	}
 	#mappa-contatti :global(.leaflet-control-attribution) {
 		font-size: 0.65rem;
 	}
 	#mappa-contatti :global(.leaflet-popup-content-wrapper) {
-		border-radius: 0.75rem;
-		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+		border-radius: 1.25rem;
+		box-shadow: 0 18px 40px rgba(46, 42, 38, 0.14);
 	}
 	#mappa-contatti :global(.leaflet-popup-content) {
 		margin: 0;
 	}
 	#mappa-contatti :global(.leaflet-popup-tip) {
-		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-	}
-	:global(html.dark) #mappa-contatti :global(.leaflet-popup-content-wrapper),
-	:global(html.dark) #mappa-contatti :global(.leaflet-popup-tip) {
-		background: #1c1917;
-		color: #e7e5e4;
-	}
-	:global(html.dark) #mappa-contatti :global(.leaflet-popup-close-button) {
-		color: #a8a29e;
+		box-shadow: 0 5px 10px rgba(46, 42, 38, 0.08);
 	}
 	#mappa-contatti :global(.popup-nome) {
 		margin: 0;
-		font-size: 0.9rem;
-		font-weight: 700;
-		color: #78350f;
-	}
-	:global(html.dark) #mappa-contatti :global(.popup-nome) {
-		color: #fbbf24;
+		font-family: "Newsreader", serif;
+		font-size: 1.05rem;
+		font-weight: 400;
+		color: #8a5238;
 	}
 	#mappa-contatti :global(.popup-indirizzo) {
 		margin: 0.35rem 0 0;
 		font-size: 0.8rem;
 		line-height: 1.4;
-		color: #57534e;
-	}
-	:global(html.dark) #mappa-contatti :global(.popup-indirizzo) {
-		color: #a8a29e;
+		color: #5c534a;
 	}
 	#mappa-contatti :global(.popup-riga) {
 		margin: 0.35rem 0 0;
 		font-size: 0.8rem;
 	}
 	#mappa-contatti :global(.popup-link) {
-		color: #b45309;
+		color: #a4664a;
 		text-decoration: none;
 		font-weight: 600;
-	}
-	:global(html.dark) #mappa-contatti :global(.popup-link) {
-		color: #fb923c;
 	}
 	#mappa-contatti :global(.popup-link:hover) {
 		text-decoration: underline;
@@ -138,7 +119,7 @@ const {
 			className: '',
 			html: `
 				<div style="position:relative;width:40px;height:48px;">
-					<div style="position:absolute;top:0;left:0;width:40px;height:40px;background:#b45309;border-radius:9999px 9999px 9999px 4px;transform:rotate(45deg);box-shadow:0 4px 10px rgba(0,0,0,0.35);"></div>
+					<div style="position:absolute;top:0;left:0;width:40px;height:40px;background:#a4664a;border-radius:9999px 9999px 9999px 4px;transform:rotate(45deg);box-shadow:0 4px 10px rgba(46,42,38,0.3);"></div>
 					<svg viewBox="0 0 24 24" fill="white" style="position:absolute;top:6px;left:6px;width:22px;height:22px;">
 						<rect x="4" y="9" width="3.5" height="8" rx="1.4" />
 						<rect x="16.5" y="9" width="3.5" height="8" rx="1.4" />
@@ -165,7 +146,7 @@ const {
 		].join('');
 
 		const contenutoPopup = `
-			<div style="min-width:180px;padding:0.85rem 1rem;">
+			<div style="min-width:180px;padding:0.9rem 1.1rem;">
 				<p class="popup-nome">${nome}</p>
 				${righeContatto}
 			</div>

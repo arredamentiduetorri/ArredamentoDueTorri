@@ -1,6 +1,4 @@
 ---
-import { getEntry } from 'astro:content';
-import ThemeToggle from './ThemeToggle.astro';
 import LangToggle from './LangToggle.astro';
 import type { Lingua } from '../i18n/utils';
 import { percorso, traduzioni } from '../i18n/utils';
@@ -12,18 +10,10 @@ interface Props {
 const { lang } = Astro.props;
 const t = traduzioni(lang);
 
-const impostazioni = await getEntry('impostazioni', 'generale');
-const nomeAttivita = impostazioni?.data.nomeAttivita ?? 'Arredamento Due Torri';
-const iniziali = nomeAttivita
-	.split(' ')
-	.map((parola) => parola[0])
-	.join('')
-	.slice(0, 3)
-	.toUpperCase();
-
 const voci = [
 	{ href: percorso(lang, '/'), label: t.nav.home },
 	{ href: percorso(lang, '/prodotti'), label: t.nav.prodotti },
+	{ href: percorso(lang, '/servizi'), label: t.nav.servizi },
 	{ href: percorso(lang, '/chi-siamo'), label: t.nav.chiSiamo },
 	{ href: percorso(lang, '/contatti'), label: t.nav.contatti },
 ];
@@ -32,44 +22,78 @@ const percorsoAttuale = Astro.url.pathname;
 const percorsoHome = percorso(lang, '/');
 ---
 
-<header class="sticky top-0 z-50 border-b border-stone-200 bg-stone-50/95 backdrop-blur dark:border-stone-800 dark:bg-stone-950/95">
-	<div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-		<a href={percorsoHome} class="flex items-center gap-3">
-			<span
-				class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-amber-700 text-base font-bold tracking-wide text-amber-800 dark:border-amber-500 dark:text-amber-500"
-			>
-				{iniziali}
-			</span>
-			<span class="hidden text-xl font-semibold tracking-tight text-stone-900 sm:inline dark:text-white">
-				{nomeAttivita}
-			</span>
+<header class="sticky top-0 z-50 bg-cream/95 backdrop-blur">
+	<div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5 sm:px-10">
+		<a href={percorsoHome} class="flex flex-col leading-tight text-ink">
+			<span class="font-heading text-2xl">Arredamenti</span>
+			<span class="text-[11px] font-semibold tracking-[0.34em] text-clay-dark uppercase">Due Torri</span>
 		</a>
-		<div class="flex items-center gap-2 sm:gap-4">
-			<nav>
-				<ul class="flex items-center gap-1 text-sm font-medium whitespace-nowrap text-stone-600 sm:gap-3 sm:text-base dark:text-stone-300">
-					{voci.map((voce) => {
-						const attiva =
-							percorsoAttuale === voce.href ||
-							(voce.href !== percorsoHome && percorsoAttuale.startsWith(voce.href));
-						return (
-							<li>
-								<a
-									href={voce.href}
-									class:list={[
-										'rounded-full px-2 py-2 transition-colors hover:text-amber-800 sm:px-3 dark:hover:text-amber-500',
-										attiva && 'font-semibold text-amber-800 dark:text-amber-500',
-									]}
-								>
-									{voce.label}
-								</a>
-							</li>
-						);
-					})}
-				</ul>
-			</nav>
-			<div class="h-6 w-px bg-stone-300/70 dark:bg-stone-700/70"></div>
+
+		<nav class="hidden items-center gap-1 md:flex">
+			{voci.map((voce) => {
+				const attiva = percorsoAttuale === voce.href || (voce.href !== percorsoHome && percorsoAttuale.startsWith(voce.href));
+				return (
+					<a
+						href={voce.href}
+						class:list={['rounded-full px-4 py-2.5 text-[15px] transition-colors', attiva ? 'bg-sand text-ink' : 'text-muted hover:bg-sand/60']}
+					>
+						{voce.label}
+					</a>
+				);
+			})}
 			<LangToggle lang={lang} />
-			<ThemeToggle lang={lang} />
+			<a href={percorso(lang, '/contatti')} class="ml-2 rounded-full bg-clay px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-clay-dark">
+				{t.nav.ctaHeader}
+			</a>
+		</nav>
+
+		<div class="flex items-center gap-2 md:hidden">
+			<a href={`tel:${t.telefonoGrezzo}`} class="rounded-full border border-line px-4 py-2.5 text-sm text-ink">{t.nav.chiama}</a>
+			<button
+				id="menu-toggle"
+				type="button"
+				aria-label={t.nav.apriMenu}
+				aria-expanded="false"
+				class="flex h-11 w-11 flex-col items-center justify-center gap-1.5"
+			>
+				<span class="block h-[1.5px] w-6 rounded bg-ink"></span>
+				<span class="block h-[1.5px] w-6 rounded bg-ink"></span>
+			</button>
+		</div>
+	</div>
+
+	<div id="menu-mobile" class="fixed inset-0 z-40 hidden flex-col bg-ink text-cream md:hidden">
+		<div class="flex items-center justify-between px-6 py-5">
+			<span class="font-heading text-xl">Arredamenti <span class="block text-[10px] font-semibold tracking-[0.3em] text-clay uppercase">Due Torri</span></span>
+			<button id="menu-close" type="button" aria-label={t.nav.chiudiMenu} class="text-3xl leading-none">&times;</button>
+		</div>
+		<nav class="flex flex-col px-6">
+			{voci.map((voce) => (
+				<a href={voce.href} class="border-b border-white/10 py-4 font-heading text-3xl">{voce.label}</a>
+			))}
+		</nav>
+		<div class="mt-auto flex flex-col gap-3 px-6 pb-10">
+			<a href={percorso(lang, '/contatti')} class="rounded-full bg-clay px-6 py-4 text-center text-[15px] font-medium text-white">{t.nav.ctaHeader}</a>
+			<a href={`tel:${t.telefonoGrezzo}`} class="rounded-full border border-white/30 px-6 py-4 text-center text-[15px]">{t.telefono}</a>
 		</div>
 	</div>
 </header>
+
+<script>
+	(function () {
+		const apri = document.getElementById('menu-toggle');
+		const chiudi = document.getElementById('menu-close');
+		const menu = document.getElementById('menu-mobile');
+		if (!apri || !chiudi || !menu) return;
+		apri.addEventListener('click', () => {
+			menu.classList.remove('hidden');
+			menu.classList.add('flex');
+			apri.setAttribute('aria-expanded', 'true');
+		});
+		chiudi.addEventListener('click', () => {
+			menu.classList.add('hidden');
+			menu.classList.remove('flex');
+			apri.setAttribute('aria-expanded', 'false');
+		});
+	})();
+</script>

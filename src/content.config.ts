@@ -17,6 +17,16 @@ const pagine = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/pagine' }),
 	schema: z.object({
 		titolo: z.string(),
+		tappe: z
+			.array(
+				z.object({
+					titolo: z.string(),
+					testo: z.string(),
+					immagine: z.string(),
+					immagine2: z.string().optional(),
+				}),
+			)
+			.optional(),
 	}),
 });
 

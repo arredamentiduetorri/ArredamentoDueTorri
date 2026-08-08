@@ -6,58 +6,11 @@ interface Props {
 }
 
 const { recensione } = Astro.props;
-const { nome, valutazione, luogo, testo } = recensione.data;
-const iniziali = nome
-	.split(' ')
-	.map((parola) => parola[0])
-	.join('')
-	.slice(0, 2)
-	.toUpperCase();
+const { nome, testo } = recensione.data;
 ---
 
-<div class="flex flex-col items-center">
-	<div class="relative w-full">
-		<div
-			class="absolute top-full left-1/2 z-20 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-[3px] border-r border-b border-amber-200 bg-stone-50 dark:border-amber-900/40 dark:bg-stone-900"
-		>
-		</div>
-		<div
-			class="relative z-10 flex flex-col rounded-2xl border border-amber-200 bg-stone-50 p-6 text-center shadow-sm dark:border-amber-900/40 dark:bg-stone-900"
-		>
-			<div class="flex justify-center gap-1 text-amber-500">
-				{Array.from({ length: 5 }).map((_, i) => (
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 20 20"
-						class="h-4 w-4"
-						fill={i < valutazione ? 'currentColor' : 'none'}
-						stroke="currentColor"
-						stroke-width="1"
-					>
-						<path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.9l-5.2 2.73.99-5.79-4.21-4.1 5.82-.85L10 1.5z" />
-					</svg>
-				))}
-			</div>
-			<p class="mt-4 text-sm leading-relaxed text-stone-700 italic dark:text-stone-300">"{testo}"</p>
-		</div>
-	</div>
-	<div class="mt-7 flex items-center justify-center gap-3">
-		<span
-			class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-800 dark:bg-amber-900/40 dark:text-amber-400"
-		>
-			{iniziali}
-		</span>
-		<div class="flex flex-col items-start gap-0.5">
-			<p class="text-sm font-semibold text-stone-900 dark:text-white">{nome}</p>
-			<div class="flex items-center gap-1 text-amber-600 dark:text-amber-400">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-3.5 w-3.5" fill="currentColor">
-					<path
-						fill-rule="evenodd"
-						d="M9.69 18.933a.75.75 0 00.62 0c.348-.16 1.16-.578 2.077-1.229 1.833-1.301 4.113-3.542 4.113-6.204a6.5 6.5 0 10-13 0c0 2.662 2.28 4.903 4.113 6.204.917.651 1.729 1.07 2.077 1.23zM10 11.5a2 2 0 100-4 2 2 0 000 4z"
-						clip-rule="evenodd"></path>
-				</svg>
-				<span class="text-xs font-medium">{luogo}</span>
-			</div>
-		</div>
-	</div>
+<div class="flex flex-col rounded-[1.75rem] bg-sand p-8">
+	<p class="text-clay-dark tracking-[0.2em]">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+	<p class="mt-4.5 font-heading text-[21px] leading-snug text-ink">{testo}</p>
+	<p class="mt-auto pt-5 text-sm text-faint">{nome}</p>
 </div>

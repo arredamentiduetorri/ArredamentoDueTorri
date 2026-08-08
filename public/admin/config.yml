@@ -17,13 +17,14 @@ collections:
       - label: "Categoria"
         name: "categoria"
         widget: "select"
-        options: ["Soggiorno", "Camera da letto", "Cucina", "Complementi"]
+        options: ["Cucina", "Complementi"]
       - label: "Prezzo"
         name: "prezzo"
         widget: "string"
         required: false
         hint: 'Es. "da 890 €" oppure "su preventivo"'
-      - { label: "Immagine", name: "immagine", widget: "image" }
+      - { label: "Immagine di copertina", name: "immagine", widget: "image" }
+      - { label: "Altre immagini (galleria)", name: "immagini", widget: "list", field: { widget: "image" }, required: false }
       - { label: "In evidenza in home", name: "inEvidenza", widget: "boolean", default: false }
       - { label: "Descrizione", name: "body", widget: "markdown" }
 
@@ -38,13 +39,14 @@ collections:
       - label: "Category"
         name: "categoria"
         widget: "select"
-        options: ["Living room", "Bedroom", "Kitchen", "Accessories"]
+        options: ["Kitchen", "Accessories"]
       - label: "Price"
         name: "prezzo"
         widget: "string"
         required: false
         hint: 'E.g. "from €890" or "on quote"'
-      - { label: "Image", name: "immagine", widget: "image" }
+      - { label: "Cover image", name: "immagine", widget: "image" }
+      - { label: "More images (gallery)", name: "immagini", widget: "list", field: { widget: "image" }, required: false }
       - { label: "Featured on homepage", name: "inEvidenza", widget: "boolean", default: false }
       - { label: "Description", name: "body", widget: "markdown" }
 
@@ -56,6 +58,15 @@ collections:
         file: "src/content/pagine/it/chi-siamo.md"
         fields:
           - { label: "Titolo", name: "titolo", widget: "string" }
+          - label: "Tappe della storia (timeline)"
+            name: "tappe"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Titolo tappa", name: "titolo", widget: "string" }
+              - { label: "Testo", name: "testo", widget: "text" }
+              - { label: "Immagine", name: "immagine", widget: "image" }
+              - { label: "Seconda immagine (opzionale)", name: "immagine2", widget: "image", required: false }
           - { label: "Testo", name: "body", widget: "markdown" }
       - name: "contatti"
         label: "Contatti (testo introduttivo)"
@@ -72,6 +83,15 @@ collections:
         file: "src/content/pagine/en/chi-siamo.md"
         fields:
           - { label: "Title", name: "titolo", widget: "string" }
+          - label: "Story timeline"
+            name: "tappe"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Step title", name: "titolo", widget: "string" }
+              - { label: "Text", name: "testo", widget: "text" }
+              - { label: "Image", name: "immagine", widget: "image" }
+              - { label: "Second image (optional)", name: "immagine2", widget: "image", required: false }
           - { label: "Text", name: "body", widget: "markdown" }
       - name: "contatti"
         label: "Contact (intro text)"

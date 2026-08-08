@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import type { Lingua } from '../../i18n/utils';
+import { traduzioni } from '../../i18n/utils';
+
+interface Props {
+	lang: Lingua;
+}
+
+const { lang } = Astro.props;
+const t = traduzioni(lang);
+---
+
+<Layout titolo={t.servizi.sottotitolo}>
+	<section class="mx-auto max-w-6xl px-6 py-16 sm:px-10">
+		<p class="text-[13px] font-semibold tracking-[0.16em] text-clay-dark uppercase">{t.servizi.sottotitolo}</p>
+		<h1 class="mt-4.5 max-w-[22ch] text-6xl leading-[1.06]">{t.servizi.titolo}</h1>
+
+		<div class="mt-12 flex flex-col gap-4">
+			{t.servizi.voci.map((s) => (
+				<div class="grid grid-cols-1 gap-6 rounded-[1.75rem] bg-sand p-9 sm:grid-cols-[auto_1fr_1.4fr] sm:items-start">
+					<span class="flex h-9.5 w-9.5 items-center justify-center rounded-full bg-[#efe1d6] font-heading text-[17px] text-clay-dark">{s.numero}</span>
+					<h3 class="text-[27px]">{s.titolo}</h3>
+					<p class="text-[17px] leading-relaxed text-muted">{s.testo}</p>
+				</div>
+			))}
+		</div>
+	</section>
+</Layout>

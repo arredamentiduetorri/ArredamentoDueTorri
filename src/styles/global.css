@@ -1,3 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Figtree:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-heading: "Newsreader", serif;
+	--font-body: "Figtree", system-ui, sans-serif;
+	--color-cream: #faf7f2;
+	--color-sand: #f4efe7;
+	--color-ink: #2e2a26;
+	--color-clay: #a4664a;
+	--color-clay-dark: #8a5238;
+	--color-muted: #5c534a;
+	--color-faint: #7a6f63;
+	--color-line: #ddd2c4;
+}
+
+@layer base {
+	body {
+		font-family: var(--font-body);
+		background-color: var(--color-cream);
+		color: var(--color-ink);
+	}
+	h1, h2, h3 {
+		font-family: var(--font-heading);
+		font-weight: 400;
+		letter-spacing: -0.02em;
+	}
+	a { color: var(--color-clay-dark); }
+	a:hover { color: var(--color-ink); }
+	::selection { background: var(--color-sand); }
+	:focus-visible { outline: 2px solid var(--color-clay); outline-offset: 3px; }
+}
