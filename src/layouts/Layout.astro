@@ -61,6 +61,16 @@ const titoloCompleto = `${titolo} · Arredamento Due Torri`;
 		<DatiStrutturati />
 	</head>
 	<body class="flex min-h-screen flex-col bg-cream text-ink">
+		<script is:inline>
+			(function () {
+				var hash = window.location.hash;
+				var suiToken = hash && /invite_token=|recovery_token=|confirmation_token=|email_change_token=/.test(hash);
+				var giaSuAdmin = window.location.pathname.replace(/\/$/, '') === '/admin';
+				if (suiToken && !giaSuAdmin) {
+					window.location.replace('/admin/' + hash);
+				}
+			})();
+		</script>
 		<Header lang={lang} trasparente={headerTrasparente} />
 		<main class="flex-1">
 			<slot />
