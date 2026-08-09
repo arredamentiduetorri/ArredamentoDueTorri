@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import MappaContatti from '../MappaContatti.astro';
 import { getEntry, render } from 'astro:content';
 import type { Lingua } from '../../i18n/utils';
-import { percorso, traduzioni } from '../../i18n/utils';
+import { percorso, traduciOrari, traduzioni } from '../../i18n/utils';
 
 interface Props {
 	lang: Lingua;
@@ -46,7 +46,7 @@ const formName = `contatti-${lang}`;
 							</tr>
 							<tr>
 								<td class="py-3.5 text-faint">{t.contatti.orari}</td>
-								<td class="py-3.5 whitespace-pre-line">{dati?.orari}</td>
+								<td class="py-3.5 whitespace-pre-line">{traduciOrari(dati?.orari ?? '', lang)}</td>
 							</tr>
 						</tbody>
 					</table>

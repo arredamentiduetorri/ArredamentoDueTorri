@@ -20,13 +20,6 @@ const nomeAttivita = dati?.nomeAttivita ?? 'Arredamento Due Torri';
 const recensioni = await getCollection('recensioni');
 const linkRecensioniGoogle = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${nomeAttivita} ${dati?.indirizzo ?? ''}`)}`;
 
-const fasi = [
-	{ numero: '1', titolo: t.home.collezioniHeading.includes('lavoriamo') ? 'Sopralluogo' : 'Sopralluogo', testo: 'Veniamo a misurare, guardiamo luce, prese e passaggi. Gratuito su Persiceto e dintorni.' },
-	{ numero: '2', titolo: 'Progetto', testo: 'Ti mostriamo il disegno in pianta e un render, con finiture e prezzo chiaro prima di ordinare.' },
-	{ numero: '3', titolo: 'Produzione', testo: 'Lavoriamo con produttori italiani selezionati, per portarti in casa soluzioni di qualità su misura.' },
-	{ numero: '4', titolo: 'Montaggio', testo: 'Consegniamo e montiamo noi, e smaltiamo il vecchio arredo se serve.' },
-];
-
 const prodotti = await getCollection('prodotti', ({ id }) => id.startsWith(`${lang}/`));
 const lavori = prodotti.slice(0, 6);
 
@@ -61,7 +54,7 @@ const foto = [
 				</div>
 				<div class="absolute -left-6 bottom-9 rounded-2xl bg-cream px-6 py-5 shadow-xl">
 					<p class="font-heading text-3xl text-clay-dark">5,0</p>
-					<p class="mt-0.5 text-[13px] text-faint">su Google, {recensioni.length} recensioni</p>
+					<p class="mt-0.5 text-[13px] text-faint">{t.home.suGoogle}</p>
 				</div>
 			</div>
 		</div>
@@ -71,7 +64,7 @@ const foto = [
 		class="relative hidden h-[82vh] max-h-[820px] min-h-[560px] items-center md:flex"
 		style="margin-top: calc(-1 * var(--altezza-header, 88px)); padding-top: var(--altezza-header, 88px);"
 	>
-		<HeroCarousel immagini={foto} class="absolute inset-0 h-full w-full" />
+		<HeroCarousel immagini={foto} class="absolute inset-0 h-full w-full" frecce={false} />
 		<div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/30 to-ink/10"></div>
 
 		<div class="relative mx-auto w-full max-w-6xl px-6 sm:px-10">
@@ -92,7 +85,7 @@ const foto = [
 
 		<div class="absolute right-6 bottom-6 z-10 rounded-2xl bg-cream/95 px-6 py-5 shadow-xl backdrop-blur sm:right-10 sm:bottom-10">
 			<p class="font-heading text-3xl text-clay-dark">5,0</p>
-			<p class="mt-0.5 text-[13px] text-faint">su Google, {recensioni.length} recensioni</p>
+			<p class="mt-0.5 text-[13px] text-faint">{t.home.suGoogle}</p>
 		</div>
 	</section>
 
@@ -101,7 +94,7 @@ const foto = [
 			<h2 class="text-4xl">{t.home.collezioniHeading}</h2>
 			<p class="mt-3.5 max-w-[52ch] text-[17px] leading-relaxed text-muted">{t.home.collezioniTesto}</p>
 			<div class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-				{fasi.map((f) => (
+				{t.home.fasi.map((f) => (
 					<div class="rounded-3xl bg-cream p-7">
 						<span class="flex h-9.5 w-9.5 items-center justify-center rounded-full bg-[#efe1d6] font-heading text-[17px] text-clay-dark">{f.numero}</span>
 						<h3 class="mt-5 text-[23px]">{f.titolo}</h3>
@@ -144,8 +137,8 @@ const foto = [
 	<section class="mx-auto max-w-6xl px-6 pb-20 sm:px-10">
 		<div class="grid grid-cols-1 items-center gap-10 rounded-[2.5rem] bg-ink p-10 text-cream sm:p-16 md:grid-cols-[1fr_auto]">
 			<div>
-				<h2 class="text-[46px] leading-[1.1] text-cream">Porta le misure.<br />Al resto pensiamo noi.</h2>
-				<p class="mt-4.5 max-w-[46ch] text-[17px] leading-relaxed text-[#c9bfb3]">Preventivo gratuito e senza impegno, con il disegno del progetto prima di ordinare.</p>
+				<h2 class="text-[46px] leading-[1.1] text-cream">{t.home.ctaFinaleTitoloRiga1}<br />{t.home.ctaFinaleTitoloRiga2}</h2>
+				<p class="mt-4.5 max-w-[46ch] text-[17px] leading-relaxed text-[#c9bfb3]">{t.home.ctaFinaleTesto}</p>
 			</div>
 			<div class="flex flex-col gap-3">
 				<a href={percorso(lang, '/contatti')} class="rounded-full bg-clay px-7 py-4 text-center text-[15px] font-medium text-white">{t.home.ctaPreventivo}</a>

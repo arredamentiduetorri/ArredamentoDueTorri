@@ -28,6 +28,12 @@ export default {
 		collezioniTesto:
 			'Four steps, always the same. You know in advance what happens, who comes to your home and when the furniture arrives.',
 		collezioniScopri: 'Explore',
+		fasi: [
+			{ numero: '1', titolo: 'Site visit', testo: 'We come to measure, checking light, outlets and clearances. Free of charge in Persiceto and the surrounding area.' },
+			{ numero: '2', titolo: 'Design', testo: 'We show you the floor plan and a render, with finishes and a clear price before you order.' },
+			{ numero: '3', titolo: 'Production', testo: 'We work with selected Italian manufacturers, to bring quality custom-made solutions into your home.' },
+			{ numero: '4', titolo: 'Installation', testo: 'We deliver and install everything ourselves, and take away your old furniture if needed.' },
+		],
 		categorie: {
 			soggiorno: 'Living room',
 			cameraDaLetto: 'Bedroom',
@@ -37,7 +43,11 @@ export default {
 		recensioniHeading: 'Chosen by word of mouth',
 		recensioniTesto: 'Reviews from people who chose Arredamenti Due Torri, taken from the shop\u2019s Google profile.',
 		recensioniBottone: 'Read them on Google',
+		suGoogle: 'on Google',
 		mappaSito: 'Website',
+		ctaFinaleTitoloRiga1: 'Bring the measurements.',
+		ctaFinaleTitoloRiga2: 'We take care of the rest.',
+		ctaFinaleTesto: 'Free, no-obligation quote, with the project drawing before you order.',
 	},
 	prodotti: {
 		titolo: 'What we make',

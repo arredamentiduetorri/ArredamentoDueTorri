@@ -2,9 +2,10 @@
 interface Props {
 	immagini: { src: string; alt: string }[];
 	class?: string;
+	frecce?: boolean;
 }
 
-const { immagini, class: className } = Astro.props;
+const { immagini, class: className, frecce = true } = Astro.props;
 ---
 
 <div class:list={['carosello-hero relative isolate overflow-hidden', className]}>
@@ -35,7 +36,7 @@ const { immagini, class: className } = Astro.props;
 	}
 
 	{
-		immagini.length > 1 && (
+		frecce && immagini.length > 1 && (
 			<>
 				<button
 					type="button"

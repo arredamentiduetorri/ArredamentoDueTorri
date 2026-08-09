@@ -23,3 +23,28 @@ export function percorsoAltraLingua(lang: Lingua, pathname: string): string {
 	const senzaPrefisso = pathname === '/en' ? '/' : pathname.replace(/^\/en/, '');
 	return senzaPrefisso === '' ? '/' : senzaPrefisso;
 }
+
+const giorniInglese: Record<string, string> = {
+	Lunedì: 'Monday',
+	Martedì: 'Tuesday',
+	Mercoledì: 'Wednesday',
+	Giovedì: 'Thursday',
+	Venerdì: 'Friday',
+	Sabato: 'Saturday',
+	Domenica: 'Sunday',
+};
+
+/** Traduce i nomi dei giorni nel testo degli orari (dal CMS, sempre in italiano) quando lang è 'en'. */
+export function traduciOrari(testo: string, lang: Lingua): string {
+	if (lang !== 'en' || !testo) return testo;
+	return testo
+		.split('\n')
+		.map((riga) => {
+			let tradotta = riga;
+			for (const [it, en] of Object.entries(giorniInglese)) {
+				tradotta = tradotta.replace(new RegExp(`^(\\s*)${it}`, 'i'), `$1${en}`);
+			}
+			return tradotta.replace(/\bChiuso\b/gi, 'Closed');
+		})
+		.join('\n');
+}

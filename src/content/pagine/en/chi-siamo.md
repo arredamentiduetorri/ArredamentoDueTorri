@@ -32,7 +32,3 @@ Arredamenti Due Torri s.n.c. is a furniture store in San Giovanni in Persiceto (
 Private parking conveniently available right in front of the shop. As soon as you walk in, one of our staff will assist you promptly.
 
 We follow the customer through every step: from the site visit to the design, all the way to delivery and home assembly.
-
-> The kitchen with everything I was looking for! Thank you for making it exactly as we wanted.
-
-**— Anna Tizzano**, Facebook review

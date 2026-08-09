@@ -28,6 +28,12 @@ export default {
 		collezioniTesto:
 			'Quattro passaggi, sempre gli stessi. Sai in anticipo cosa succede, chi viene a casa tua e quando arriva il mobile.',
 		collezioniScopri: 'Scopri',
+		fasi: [
+			{ numero: '1', titolo: 'Sopralluogo', testo: 'Veniamo a misurare, guardiamo luce, prese e passaggi. Gratuito su Persiceto e dintorni.' },
+			{ numero: '2', titolo: 'Progetto', testo: 'Ti mostriamo il disegno in pianta e un render, con finiture e prezzo chiaro prima di ordinare.' },
+			{ numero: '3', titolo: 'Produzione', testo: 'Lavoriamo con produttori italiani selezionati, per portarti in casa soluzioni di qualità su misura.' },
+			{ numero: '4', titolo: 'Montaggio', testo: 'Consegniamo e montiamo noi, e smaltiamo il vecchio arredo se serve.' },
+		],
 		categorie: {
 			soggiorno: 'Soggiorno',
 			cameraDaLetto: 'Camera da letto',
@@ -37,7 +43,11 @@ export default {
 		recensioniHeading: 'Ci scelgono per passaparola',
 		recensioniTesto: 'Le recensioni di chi ha scelto Arredamenti Due Torri, prese dal profilo Google del negozio.',
 		recensioniBottone: 'Leggile su Google',
+		suGoogle: 'su Google',
 		mappaSito: 'Sito web',
+		ctaFinaleTitoloRiga1: 'Porta le misure.',
+		ctaFinaleTitoloRiga2: 'Al resto pensiamo noi.',
+		ctaFinaleTesto: 'Preventivo gratuito e senza impegno, con il disegno del progetto prima di ordinare.',
 	},
 	prodotti: {
 		titolo: 'Cosa realizziamo',
