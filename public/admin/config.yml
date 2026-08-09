@@ -25,6 +25,14 @@ collections:
         hint: 'Es. "da 890 €" oppure "su preventivo"'
       - { label: "Immagine di copertina", name: "immagine", widget: "image" }
       - { label: "Altre immagini (galleria)", name: "immagini", widget: "list", field: { label: "Immagine", name: "image", widget: "image" }, required: false }
+      - label: "Caratteristiche tecniche"
+        name: "caratteristiche"
+        widget: "list"
+        required: false
+        hint: 'Es. "Materiale" / "Rovere massello". I campi lasciati vuoti non verranno mostrati sul sito.'
+        fields:
+          - { label: "Etichetta", name: "etichetta", widget: "string" }
+          - { label: "Valore", name: "valore", widget: "string" }
       - { label: "In evidenza in home", name: "inEvidenza", widget: "boolean", default: false }
       - { label: "Descrizione", name: "body", widget: "markdown" }
 
@@ -47,6 +55,14 @@ collections:
         hint: 'E.g. "from €890" or "on quote"'
       - { label: "Cover image", name: "immagine", widget: "image" }
       - { label: "More images (gallery)", name: "immagini", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
+      - label: "Technical specifications"
+        name: "caratteristiche"
+        widget: "list"
+        required: false
+        hint: 'E.g. "Material" / "Solid oak". Fields left empty will not be shown on the site.'
+        fields:
+          - { label: "Label", name: "etichetta", widget: "string" }
+          - { label: "Value", name: "valore", widget: "string" }
       - { label: "Featured on homepage", name: "inEvidenza", widget: "boolean", default: false }
       - { label: "Description", name: "body", widget: "markdown" }
 

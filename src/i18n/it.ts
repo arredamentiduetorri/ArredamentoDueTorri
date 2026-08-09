@@ -47,6 +47,7 @@ export default {
 		tornaAiProdotti: 'Torna ai prodotti',
 		richiediInfo: 'Richiedi un preventivo per questo',
 		scopriDiPiu: 'Scopri',
+		caratteristicheTecniche: 'Caratteristiche tecniche',
 		altriProdotti: 'Altri prodotti in questa categoria',
 	},
 	servizi: {

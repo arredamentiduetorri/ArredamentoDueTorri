@@ -10,6 +10,17 @@ immagini:
   - "/images/cucina-angolare-bicolore-pietra/545351988_1401116144722466_6026413435689017199_n.jpg"
   - "/images/cucina-angolare-bicolore-pietra/545564630_1401114768055937_976695570711194968_n.jpg"
   - "/images/cucina-angolare-bicolore-pietra/545793650_1401113144722766_3815983713517386593_n.jpg"
+caratteristiche:
+  - etichetta: "Finitura basi"
+    valore: "Effetto pietra chiara"
+  - etichetta: "Finitura pensili"
+    valore: "Effetto pietra scura"
+  - etichetta: "Piano di lavoro"
+    valore: "Gres effetto marmo nero venato"
+  - etichetta: "Cappa"
+    valore: "A parete in acciaio a vista"
+  - etichetta: "Piano cottura"
+    valore: "A gas, 5 fuochi"
 inEvidenza: false
 ---
 

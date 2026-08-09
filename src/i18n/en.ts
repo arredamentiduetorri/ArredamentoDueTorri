@@ -45,6 +45,7 @@ export default {
 		categorieLabel: 'Categories',
 		tutte: 'All',
 		tornaAiProdotti: 'Back to products',
+		caratteristicheTecniche: 'Technical specifications',
 		richiediInfo: 'Request a quote for this',
 		scopriDiPiu: 'Discover',
 		altriProdotti: 'More products in this category',

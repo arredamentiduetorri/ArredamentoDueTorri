@@ -9,6 +9,14 @@ const prodotti = defineCollection({
 		prezzo: z.string().optional(),
 		immagine: z.string(),
 		immagini: z.array(z.string()).optional(),
+		caratteristiche: z
+			.array(
+				z.object({
+					etichetta: z.string(),
+					valore: z.string(),
+				}),
+			)
+			.optional(),
 		inEvidenza: z.boolean().default(false),
 	}),
 });

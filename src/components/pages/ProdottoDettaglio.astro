@@ -17,8 +17,9 @@ interface Props {
 
 const { lang, prodotto } = Astro.props;
 const t = traduzioni(lang);
-const { nome, categoria, immagine } = prodotto.data;
+const { nome, categoria, immagine, caratteristiche } = prodotto.data;
 const { Content } = await render(prodotto);
+const specifiche = (caratteristiche ?? []).filter((c) => c.etichetta.trim() && c.valore.trim());
 const slug = slugProdotto(prodotto.id);
 const icona = immagineSegnaposto(immagine) ? iconePerSlug[slug] : undefined;
 
@@ -59,6 +60,21 @@ const altriProdotti = await getCollection(
 				<div class="prose prose-neutral mt-5 max-w-none text-[17px] leading-relaxed text-muted">
 					<Content />
 				</div>
+
+				{specifiche.length > 0 && (
+					<div class="mt-8 rounded-[1.5rem] border border-line bg-sand/60 p-6">
+						<h2 class="text-xs font-semibold tracking-[0.16em] text-clay-dark uppercase">{t.prodotti.caratteristicheTecniche}</h2>
+						<dl class="mt-4 divide-y divide-line/70">
+							{specifiche.map((c) => (
+								<div class="flex items-baseline justify-between gap-4 py-2.5 text-[15px]">
+									<dt class="text-muted">{c.etichetta}</dt>
+									<dd class="text-right font-medium text-ink">{c.valore}</dd>
+								</div>
+							))}
+						</dl>
+					</div>
+				)}
+
 				<a href={percorso(lang, '/contatti')} class="mt-8 inline-block rounded-full bg-clay px-7 py-4 text-[15px] font-medium text-white hover:bg-clay-dark">
 					{t.prodotti.richiediInfo}
 				</a>
