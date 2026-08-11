@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import HeroCarousel from '../HeroCarousel.astro';
 import RecensioneCard from '../RecensioneCard.astro';
+import ProductCard from '../ProductCard.astro';
 import { getEntry, getCollection } from 'astro:content';
 import type { Lingua } from '../../i18n/utils';
 import { percorso, traduzioni } from '../../i18n/utils';
@@ -111,15 +112,7 @@ const foto = [
 			<a href={percorso(lang, '/prodotti')} class="text-base">{t.home.ctaProdotti} &rarr;</a>
 		</div>
 		<div class="mt-9 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
-			{lavori.map((prodotto) => (
-				<a href={percorso(lang, `/prodotti/${prodotto.id.replace(/^(it|en)\//, '')}`)} class="block text-ink">
-					<div class="aspect-[4/3] overflow-hidden rounded-3xl bg-sand">
-						<img src={prodotto.data.immagine} alt={prodotto.data.nome} class="h-full w-full object-cover" />
-					</div>
-					<p class="mt-4.5 text-xs font-semibold tracking-[0.14em] text-clay-dark uppercase">{prodotto.data.categoria}</p>
-					<h3 class="mt-2 text-[22px]">{prodotto.data.nome}</h3>
-				</a>
-			))}
+			{lavori.map((prodotto) => <ProductCard prodotto={prodotto} lang={lang} />)}
 		</div>
 	</section>
 

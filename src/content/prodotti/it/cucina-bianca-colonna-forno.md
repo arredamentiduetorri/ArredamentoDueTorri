@@ -1,6 +1,8 @@
 ---
 nome: "Cucina bianca ad angolo con colonna forno"
 categoria: "Cucina"
+prezzo: "da 9.400 €"
+prezzoScontato: "da 7.400 €"
 immagine: "/images/cucina-bianca-colonna-forno/749756130_1675939920573419_1747561257974126817_n.jpg"
 immagini:
   - "/images/cucina-bianca-colonna-forno/749756130_1675939920573419_1747561257974126817_n.jpg"

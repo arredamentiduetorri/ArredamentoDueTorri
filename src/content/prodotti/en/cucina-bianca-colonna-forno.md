@@ -1,6 +1,8 @@
 ---
 nome: "White corner kitchen with oven column"
 categoria: "Kitchen"
+prezzo: "from €9,400"
+prezzoScontato: "from €7,400"
 immagine: "/images/cucina-bianca-colonna-forno/749756130_1675939920573419_1747561257974126817_n.jpg"
 immagini:
   - "/images/cucina-bianca-colonna-forno/749756130_1675939920573419_1747561257974126817_n.jpg"

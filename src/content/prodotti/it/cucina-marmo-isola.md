@@ -1,6 +1,8 @@
 ---
 nome: "Cucina bianca effetto marmo con isola"
 categoria: "Cucina"
+prezzo: "da 8.900 €"
+prezzoScontato: "da 6.900 €"
 immagine: "/images/cucina6.jpg"
 inEvidenza: true
 ---

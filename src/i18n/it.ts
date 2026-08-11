@@ -59,6 +59,7 @@ export default {
 		scopriDiPiu: 'Scopri',
 		caratteristicheTecniche: 'Caratteristiche tecniche',
 		altriProdotti: 'Altri prodotti in questa categoria',
+		offertaBadge: 'Offerta',
 	},
 	servizi: {
 		titolo: 'Non vendiamo mobili. Risolviamo stanze.',

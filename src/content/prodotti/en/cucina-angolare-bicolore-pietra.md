@@ -1,6 +1,7 @@
 ---
 nome: "Two-tone corner kitchen, stone effect"
 categoria: "Kitchen"
+prezzo: "from €7,200"
 immagine: "/images/cucina-angolare-bicolore-pietra/544811642_1401114271389320_5339447729678455872_n.jpg"
 immagini:
   - "/images/cucina-angolare-bicolore-pietra/544811642_1401114271389320_5339447729678455872_n.jpg"

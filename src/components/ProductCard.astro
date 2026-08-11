@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import type { Lingua } from '../i18n/utils';
 import { percorso, traduzioni } from '../i18n/utils';
 import { iconePerSlug, slugProdotto, immagineSegnaposto } from '../lib/iconeProdotti';
+import { percentualeSconto } from '../lib/prezzo';
 
 interface Props {
 	prodotto: CollectionEntry<'prodotti'>;
@@ -11,13 +12,20 @@ interface Props {
 
 const { prodotto, lang } = Astro.props;
 const t = traduzioni(lang);
-const { nome, categoria, immagine } = prodotto.data;
+const { nome, categoria, immagine, prezzo, prezzoScontato } = prodotto.data;
 const slug = slugProdotto(prodotto.id);
 const icona = immagineSegnaposto(immagine) ? iconePerSlug[slug] : undefined;
+const inSconto = Boolean(prezzo && prezzoScontato);
+const percentuale = inSconto ? percentualeSconto(prezzo!, prezzoScontato!) : null;
 ---
 
 <a href={percorso(lang, `/prodotti/${slug}`)} data-categoria={categoria} class="block text-ink">
 	<div class="relative aspect-[4/3] overflow-hidden rounded-3xl bg-sand">
+		{inSconto && (
+			<span class="absolute top-3 left-3 z-10 rounded-full bg-clay px-3 py-1 text-xs font-semibold text-white shadow-sm">
+				{percentuale !== null ? `-${percentuale}%` : t.prodotti.offertaBadge}
+			</span>
+		)}
 		{icona ? (
 			<div class="flex h-full w-full items-center justify-center bg-[#efe1d6]">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-20 w-20 text-clay-dark/50" fill="currentColor" set:html={icona} />
@@ -28,5 +36,17 @@ const icona = immagineSegnaposto(immagine) ? iconePerSlug[slug] : undefined;
 	</div>
 	<p class="mt-4.5 text-xs font-semibold tracking-[0.14em] text-clay-dark uppercase">{categoria}</p>
 	<h3 class="mt-2 text-[22px]">{nome}</h3>
+	{prezzo && (
+		<p class="mt-1.5 flex items-baseline gap-2">
+			{inSconto ? (
+				<>
+					<span class="text-[15px] text-faint line-through">{prezzo}</span>
+					<span class="text-[17px] font-semibold text-clay-dark">{prezzoScontato}</span>
+				</>
+			) : (
+				<span class="text-[15px] text-muted">{prezzo}</span>
+			)}
+		</p>
+	)}
 	<span class="mt-1.5 block text-[15px] text-faint">{t.prodotti.scopriDiPiu}</span>
 </a>

@@ -59,6 +59,7 @@ export default {
 		richiediInfo: 'Request a quote for this',
 		scopriDiPiu: 'Discover',
 		altriProdotti: 'More products in this category',
+		offertaBadge: 'Sale',
 	},
 	servizi: {
 		titolo: "We don't sell furniture. We solve rooms.",

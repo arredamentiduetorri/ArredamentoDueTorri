@@ -1,6 +1,7 @@
 ---
 nome: "Marble-effect extendable table"
 categoria: "Accessories"
+prezzo: "from €1,290"
 immagine: "/images/tavolo1.jpg"
 inEvidenza: true
 ---

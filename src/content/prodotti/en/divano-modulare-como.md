@@ -2,6 +2,7 @@
 nome: "3-seat sofa bed"
 categoria: "Accessories"
 prezzo: "€1,490 VAT included"
+prezzoScontato: "€1,190 VAT included"
 immagine: "/images/divano3.jpg"
 inEvidenza: true
 ---

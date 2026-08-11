@@ -1,6 +1,7 @@
 ---
 nome: "Tavolo allungabile effetto marmo"
 categoria: "Complementi"
+prezzo: "da 1.290 €"
 immagine: "/images/tavolo1.jpg"
 inEvidenza: true
 ---

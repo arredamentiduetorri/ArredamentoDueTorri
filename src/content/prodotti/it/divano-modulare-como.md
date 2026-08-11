@@ -2,6 +2,7 @@
 nome: "Divano letto 3 posti"
 categoria: "Complementi"
 prezzo: "1.490 € IVA inclusa"
+prezzoScontato: "1.190 € IVA inclusa"
 immagine: "/images/divano3.jpg"
 inEvidenza: true
 ---

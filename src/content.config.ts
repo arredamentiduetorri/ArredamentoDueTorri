@@ -7,6 +7,7 @@ const prodotti = defineCollection({
 		nome: z.string(),
 		categoria: z.string(),
 		prezzo: z.string().optional(),
+		prezzoScontato: z.string().optional(),
 		immagine: z.string(),
 		immagini: z.array(z.string()).optional(),
 		caratteristiche: z

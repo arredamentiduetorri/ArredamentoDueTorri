@@ -23,6 +23,11 @@ collections:
         widget: "string"
         required: false
         hint: 'Es. "da 890 €" oppure "su preventivo"'
+      - label: "Prezzo scontato (opzionale)"
+        name: "prezzoScontato"
+        widget: "string"
+        required: false
+        hint: 'Se compilato, "Prezzo" viene mostrato barrato e questo diventa il nuovo prezzo in evidenza, con il badge dello sconto. Es. "690 €"'
       - { label: "Immagine di copertina", name: "immagine", widget: "image" }
       - { label: "Altre immagini (galleria)", name: "immagini", widget: "list", field: { label: "Immagine", name: "image", widget: "image" }, required: false }
       - label: "Caratteristiche tecniche"
@@ -53,6 +58,11 @@ collections:
         widget: "string"
         required: false
         hint: 'E.g. "from €890" or "on quote"'
+      - label: "Discounted price (optional)"
+        name: "prezzoScontato"
+        widget: "string"
+        required: false
+        hint: 'If filled in, "Price" is shown crossed out and this becomes the new highlighted price, with a discount badge. E.g. "€690"'
       - { label: "Cover image", name: "immagine", widget: "image" }
       - { label: "More images (gallery)", name: "immagini", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
       - label: "Technical specifications"
