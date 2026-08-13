@@ -16,8 +16,9 @@ collections:
       - { label: "Nome prodotto", name: "nome", widget: "string" }
       - label: "Categoria"
         name: "categoria"
-        widget: "select"
+        widget: "categoria"
         options: ["Cucina", "Complementi"]
+        hint: 'Scrivi il nome della categoria: puoi scegliere un suggerimento o scriverne una nuova. Per raggruppare un prodotto con altri già esistenti, usa esattamente lo stesso nome, maiuscole comprese.'
       - label: "Prezzo"
         name: "prezzo"
         widget: "string"
@@ -51,8 +52,9 @@ collections:
       - { label: "Product name", name: "nome", widget: "string" }
       - label: "Category"
         name: "categoria"
-        widget: "select"
+        widget: "categoria"
         options: ["Kitchen", "Accessories"]
+        hint: 'Type the category name: pick a suggestion or write a new one. To group a product with existing ones, use the exact same name, including capitalization.'
       - label: "Price"
         name: "prezzo"
         widget: "string"
