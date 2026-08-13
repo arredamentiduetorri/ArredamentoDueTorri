@@ -1,7 +1,7 @@
 ---
-nome: "Divano angolare grigio relax"
-categoria: "Complementi"
-immagine: "/images/divano4.jpg"
+nome: Divano angolare grigio relax
+categoria: Divani
+immagine: /images/divano4.jpg
 inEvidenza: false
 ---
 
