@@ -16,7 +16,7 @@ interface Props {
 const lang = rilevaLingua(Astro.url);
 const t = traduzioni(lang);
 
-const { titolo, descrizione = t.meta.descrizione, immagine = '/images/shop.jpeg', headerTrasparente = false, noIndex = false } = Astro.props;
+const { titolo, descrizione = t.meta.descrizione, immagine = '/images/og-cover.jpg', headerTrasparente = false, noIndex = false } = Astro.props;
 
 const urlCanonico = new URL(Astro.url.pathname, Astro.site);
 const urlAltraLingua = new URL(percorsoAltraLingua(lang, Astro.url.pathname), Astro.site);
