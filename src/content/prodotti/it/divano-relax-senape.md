@@ -1,7 +1,8 @@
 ---
-nome: "Divano relax giallo senape"
-categoria: "Complementi"
-immagine: "/images/divano1.jpg"
+nome: Divano relax giallo senape
+categoria: Complementi
+prezzo: Da 1500,00€
+immagine: /images/divano1.jpg
 inEvidenza: true
 ---
 

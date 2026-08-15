@@ -1,7 +1,7 @@
 ---
 nome: Cucina angolare bicolore effetto pietra
 categoria: Cucina
-prezzo: da 7.200 €
+prezzo: ""
 immagine: /images/cucina-angolare-bicolore-pietra/544811642_1401114271389320_5339447729678455872_n.jpg
 immagini:
   - /images/cucina-angolare-bicolore-pietra/544811642_1401114271389320_5339447729678455872_n.jpg

@@ -1,6 +1,7 @@
 ---
 nome: Divano angolare grigio relax
 categoria: Divani
+prezzo: Da 2600,00€
 immagine: /images/divano4.jpg
 inEvidenza: false
 ---
