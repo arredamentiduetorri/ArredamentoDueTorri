@@ -67,16 +67,19 @@ const percorsoHome = percorso(lang, '/');
 	</div>
 </header>
 
-<div id="menu-mobile" class="fixed inset-0 z-40 hidden flex-col bg-ink text-cream md:hidden">
-	<div class="flex items-center justify-between px-6 py-5">
-		<span class="font-heading text-xl">Arredamenti <span class="block text-[10px] font-semibold tracking-[0.3em] text-clay uppercase">Due Torri</span></span>
-		<button id="menu-close" type="button" aria-label={t.nav.chiudiMenu} class="text-3xl leading-none">&times;</button>
-	</div>
-	<nav class="flex flex-col px-6">
+<div
+	id="menu-mobile"
+	class="fixed inset-x-0 bottom-0 z-40 hidden flex-col bg-ink text-cream md:hidden"
+	style={`top: var(--altezza-header, 88px)`}
+>
+	<nav class="flex flex-col px-6 pt-6">
 		{voci.map((voce) => (
 			<a href={voce.href} class="border-b border-white/10 py-4 font-heading text-3xl">{voce.label}</a>
 		))}
 	</nav>
+	<div class="flex justify-start px-6 pt-4">
+		<LangToggle lang={lang} />
+	</div>
 	<div class="mt-auto flex flex-col gap-3 px-6 pb-10">
 		<a href={percorso(lang, '/contatti')} class="rounded-full bg-clay px-6 py-4 text-center text-[15px] font-medium text-white">{t.nav.ctaHeader}</a>
 		<a href={`tel:${t.telefonoGrezzo}`} class="rounded-full border border-white/30 px-6 py-4 text-center text-[15px]">{t.telefono}</a>
@@ -86,26 +89,28 @@ const percorsoHome = percorso(lang, '/');
 <script>
 	(function () {
 		const apri = document.getElementById('menu-toggle');
-		const chiudi = document.getElementById('menu-close');
 		const menu = document.getElementById('menu-mobile');
-		if (!apri || !chiudi || !menu) return;
+		if (!apri || !menu) return;
+
+		const header = document.getElementById('header-sito');
 
 		function apriMenu() {
 			menu!.classList.remove('hidden');
 			menu!.classList.add('flex');
 			apri!.setAttribute('aria-expanded', 'true');
+			header?.classList.add('menu-aperto');
 		}
 		function chiudiMenu() {
 			menu!.classList.add('hidden');
 			menu!.classList.remove('flex');
 			apri!.setAttribute('aria-expanded', 'false');
+			header?.classList.remove('menu-aperto');
 		}
 
 		apri.addEventListener('click', () => {
 			if (apri.getAttribute('aria-expanded') === 'true') chiudiMenu();
 			else apriMenu();
 		});
-		chiudi.addEventListener('click', chiudiMenu);
 		menu.querySelectorAll('nav a').forEach((link) => link.addEventListener('click', chiudiMenu));
 	})();
 </script>
@@ -129,6 +134,24 @@ const percorsoHome = percorso(lang, '/');
 			background-color: rgb(250 247 242 / 0.95);
 			backdrop-filter: blur(12px);
 		}
+	}
+
+	#header-sito.menu-aperto {
+		background-color: var(--color-ink) !important;
+		background-image: none !important;
+		backdrop-filter: none !important;
+	}
+	#header-sito.menu-aperto .text-ink {
+		color: var(--color-cream) !important;
+	}
+	#header-sito.menu-aperto .text-clay-dark {
+		color: var(--color-clay) !important;
+	}
+	#header-sito.menu-aperto .border-line {
+		border-color: rgb(250 247 242 / 0.3) !important;
+	}
+	#header-sito.menu-aperto .bg-ink {
+		background-color: var(--color-cream) !important;
 	}
 </style>
 
