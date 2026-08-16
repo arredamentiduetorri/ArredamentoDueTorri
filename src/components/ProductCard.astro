@@ -1,9 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import type { Lingua } from '../i18n/utils';
 import { percorso, traduzioni } from '../i18n/utils';
 import { iconePerSlug, slugProdotto, immagineSegnaposto } from '../lib/iconeProdotti';
 import { percentualeSconto } from '../lib/prezzo';
+import { risolviImmagine } from '../lib/immagini';
 
 interface Props {
 	prodotto: CollectionEntry<'prodotti'>;
@@ -15,6 +17,7 @@ const t = traduzioni(lang);
 const { nome, categoria, immagine, prezzo, prezzoScontato } = prodotto.data;
 const slug = slugProdotto(prodotto.id);
 const icona = immagineSegnaposto(immagine) ? iconePerSlug[slug] : undefined;
+const immagineRisolta = risolviImmagine(immagine);
 const inSconto = Boolean(prezzo && prezzoScontato);
 const percentuale = inSconto ? percentualeSconto(prezzo!, prezzoScontato!) : null;
 ---
@@ -30,8 +33,10 @@ const percentuale = inSconto ? percentualeSconto(prezzo!, prezzoScontato!) : nul
 			<div class="flex h-full w-full items-center justify-center bg-[#efe1d6]">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-20 w-20 text-clay-dark/50" fill="currentColor" set:html={icona} />
 			</div>
+		) : typeof immagineRisolta === 'string' ? (
+			<img src={immagineRisolta} alt={nome} loading="lazy" class="h-full w-full object-cover" />
 		) : (
-			<img src={immagine} alt={nome} loading="lazy" class="h-full w-full object-cover" />
+			<Image src={immagineRisolta} alt={nome} loading="lazy" format="webp" class="h-full w-full object-cover" />
 		)}
 	</div>
 	<p class="mt-4.5 text-xs font-semibold tracking-[0.14em] text-clay-dark uppercase">{categoria}</p>

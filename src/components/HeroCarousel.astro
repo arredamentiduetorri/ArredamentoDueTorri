@@ -1,6 +1,9 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
-	immagini: { src: string; alt: string }[];
+	immagini: { src: string | ImageMetadata; alt: string }[];
 	class?: string;
 	frecce?: boolean;
 }
@@ -10,14 +13,24 @@ const { immagini, class: className, frecce = true } = Astro.props;
 
 <div class:list={['carosello-hero relative isolate overflow-hidden', className]}>
 	{
-		immagini.map((img, i) => (
-			<img
-				src={img.src}
-				alt={img.alt}
-				loading={i === 0 ? 'eager' : 'lazy'}
-				class:list={['carosello-slide absolute inset-0 h-full w-full object-cover', i === 0 && 'is-active']}
-			/>
-		))
+		immagini.map((img, i) =>
+			typeof img.src === 'string' ? (
+				<img
+					src={img.src}
+					alt={img.alt}
+					loading={i === 0 ? 'eager' : 'lazy'}
+					class:list={['carosello-slide absolute inset-0 h-full w-full object-cover', i === 0 && 'is-active']}
+				/>
+			) : (
+				<Image
+					src={img.src}
+					alt={img.alt}
+					loading={i === 0 ? 'eager' : 'lazy'}
+					format="webp"
+					class:list={['carosello-slide absolute inset-0 h-full w-full object-cover', i === 0 && 'is-active']}
+				/>
+			),
+		)
 	}
 
 	{

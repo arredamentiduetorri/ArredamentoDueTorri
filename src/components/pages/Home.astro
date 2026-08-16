@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import HeroCarousel from '../HeroCarousel.astro';
 import RecensioneCard from '../RecensioneCard.astro';
@@ -6,6 +7,7 @@ import ProductCard from '../ProductCard.astro';
 import { getEntry, getCollection } from 'astro:content';
 import type { Lingua } from '../../i18n/utils';
 import { percorso, traduzioni } from '../../i18n/utils';
+import { risolviImmagine } from '../../lib/immagini';
 
 interface Props {
 	lang: Lingua;
@@ -25,12 +27,12 @@ const prodotti = await getCollection('prodotti', ({ id }) => id.startsWith(`${la
 const lavori = prodotti.slice(0, 6);
 
 const foto = [
-	{ src: '/images/homeCarouselImages/cucina1.jpg', alt: t.home.showroomAlt },
-	{ src: '/images/homeCarouselImages/cucina2.jpg', alt: t.home.showroomAlt },
-	{ src: '/images/homeCarouselImages/cucina3.jpg', alt: t.home.showroomAlt },
-	{ src: '/images/homeCarouselImages/cucina4.jpg', alt: t.home.showroomAlt },
-	{ src: '/images/homeCarouselImages/cucina5.jpg', alt: t.home.showroomAlt },
-];
+	'/images/homeCarouselImages/cucina1.jpg',
+	'/images/homeCarouselImages/cucina2.jpg',
+	'/images/homeCarouselImages/cucina3.jpg',
+	'/images/homeCarouselImages/cucina4.jpg',
+	'/images/homeCarouselImages/cucina5.jpg',
+].map((src) => ({ src: risolviImmagine(src), alt: t.home.showroomAlt }));
 ---
 
 <Layout titolo={t.nav.home} headerTrasparente>
@@ -51,7 +53,11 @@ const foto = [
 			</div>
 			<div class="relative">
 				<div class="aspect-[4/5] overflow-hidden rounded-t-[200px] rounded-b-3xl">
-					<img src={foto[0].src} alt={t.home.showroomAlt} class="h-full w-full object-cover" />
+					{typeof foto[0].src === 'string' ? (
+						<img src={foto[0].src} alt={t.home.showroomAlt} class="h-full w-full object-cover" />
+					) : (
+						<Image src={foto[0].src} alt={t.home.showroomAlt} format="webp" class="h-full w-full object-cover" />
+					)}
 				</div>
 				<div class="absolute -left-6 bottom-9 rounded-2xl bg-cream px-6 py-5 shadow-xl">
 					<p class="font-heading text-3xl text-clay-dark">5,0</p>

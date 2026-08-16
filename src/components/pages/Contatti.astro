@@ -1,9 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import MappaContatti from '../MappaContatti.astro';
 import { getEntry, render } from 'astro:content';
 import type { Lingua } from '../../i18n/utils';
 import { percorso, traduciOrari, traduzioni } from '../../i18n/utils';
+import { risolviImmagine } from '../../lib/immagini';
 
 interface Props {
 	lang: Lingua;
@@ -16,6 +18,7 @@ const { Content } = await render(pagina!);
 const impostazioni = await getEntry('impostazioni', 'generale');
 const dati = impostazioni?.data;
 const formName = `contatti-${lang}`;
+const immagineShop = risolviImmagine('/images/shop.jpeg');
 ---
 
 <Layout titolo={pagina!.data.titolo}>
@@ -27,7 +30,11 @@ const formName = `contatti-${lang}`;
 					<Content />
 				</div>
 				<div class="mt-8 aspect-[4/3] overflow-hidden rounded-[1.75rem]">
-					<img src="/images/shop.jpeg" alt={dati?.nomeAttivita} class="h-full w-full object-cover" />
+					{typeof immagineShop === 'string' ? (
+						<img src={immagineShop} alt={dati?.nomeAttivita} class="h-full w-full object-cover" />
+					) : (
+						<Image src={immagineShop} alt={dati?.nomeAttivita} format="webp" class="h-full w-full object-cover" />
+					)}
 				</div>
 				<div class="mt-5 rounded-3xl bg-sand px-6">
 					<table class="w-full border-collapse text-[15px]">

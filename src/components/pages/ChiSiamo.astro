@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import { getEntry, render } from 'astro:content';
 import type { Lingua } from '../../i18n/utils';
 import { traduzioni } from '../../i18n/utils';
+import { risolviImmagine } from '../../lib/immagini';
 
 interface Props {
 	lang: Lingua;
@@ -12,7 +14,8 @@ const { lang } = Astro.props;
 const t = traduzioni(lang);
 const pagina = await getEntry('pagine', `${lang}/chi-siamo`);
 const { Content } = await render(pagina!);
-const tappe = pagina!.data.tappe ?? [];
+const tappe = (pagina!.data.tappe ?? []).map((tappa) => ({ ...tappa, immagineRisolta: risolviImmagine(tappa.immagine) }));
+const immagineHero = risolviImmagine('/images/storia/08-oggi.jpg');
 ---
 
 <Layout titolo={pagina!.data.titolo}>
@@ -25,7 +28,11 @@ const tappe = pagina!.data.tappe ?? [];
 				</div>
 			</div>
 			<div class="aspect-[4/5] overflow-hidden rounded-t-[200px] rounded-b-3xl">
-				<img src="/images/storia/08-oggi.jpg" alt={pagina!.data.titolo} class="h-full w-full object-cover" />
+				{typeof immagineHero === 'string' ? (
+					<img src={immagineHero} alt={pagina!.data.titolo} class="h-full w-full object-cover" />
+				) : (
+					<Image src={immagineHero} alt={pagina!.data.titolo} format="webp" class="h-full w-full object-cover" />
+				)}
 			</div>
 		</div>
 	</section>
@@ -51,7 +58,11 @@ const tappe = pagina!.data.tappe ?? [];
 					{tappe.map((tappa, i) => (
 						<div class="tappa grid grid-cols-1 items-center gap-14 md:grid-cols-2">
 							<div class:list={[i % 2 === 0 ? 'md:order-1' : 'md:order-2', 'tappa-immagine relative aspect-[5/4] overflow-hidden rounded-[2rem]']}>
-								<img src={tappa.immagine} alt={tappa.titolo} loading="lazy" class="h-full w-full object-cover" />
+								{typeof tappa.immagineRisolta === 'string' ? (
+									<img src={tappa.immagineRisolta} alt={tappa.titolo} loading="lazy" class="h-full w-full object-cover" />
+								) : (
+									<Image src={tappa.immagineRisolta} alt={tappa.titolo} loading="lazy" format="webp" class="h-full w-full object-cover" />
+								)}
 								<div class="tappa-velo pointer-events-none absolute inset-0 bg-ink" aria-hidden="true"></div>
 							</div>
 							<div class:list={[i % 2 === 0 ? 'md:order-2' : 'md:order-1']}>
