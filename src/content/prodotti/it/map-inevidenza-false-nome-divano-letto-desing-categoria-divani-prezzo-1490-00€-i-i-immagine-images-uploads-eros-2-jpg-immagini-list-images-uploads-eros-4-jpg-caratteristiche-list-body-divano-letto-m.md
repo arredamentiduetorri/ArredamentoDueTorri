@@ -4,6 +4,8 @@ categoria: Divani
 prezzo: 1490,00€ i.i.
 immagine: /images/uploads/eros-2.jpg
 immagini:
+  - /images/uploads/eros-1.jpg
+  - /images/uploads/eros-3.jpg
   - /images/uploads/eros-4.jpg
 caratteristiche: []
 inEvidenza: false
