@@ -1,6 +1,6 @@
 ---
 nome: Divano angolare verde salvia
-categoria: Complementi
+categoria: Divani
 prezzo: Da 1600,00€
 immagine: /images/divano2.jpg
 inEvidenza: false
